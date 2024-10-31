@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agri Officer Data Entry</title>
+    <link rel="stylesheet" href="agriofficer_style.css">
     <style>
         table tr:not(:first-child) {
             cursor: pointer; 
@@ -70,6 +71,7 @@
                     <th>Data Received</th>
                     <th>Quantity</th>
                     <th>Selling Price Per Kg</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody id="tableBody"></tbody>
@@ -84,6 +86,7 @@
             let sellingPrices = [];
             let labels = [];
             let n = 0;
+            let editingRowIndex = null;
 
             const ctx = document.getElementById('myChart').getContext('2d');
             const myChart = new Chart(ctx, {
@@ -128,29 +131,95 @@
                     return;
                 }
 
-                // Add data to the table
-                const tableBody = document.getElementById('tableBody');
-                const newRow = tableBody.insertRow(n);
-                newRow.insertCell(0).innerText = AgriOfficerId;
-                newRow.insertCell(1).innerText = Date;
-                newRow.insertCell(2).innerText = ProductScanned;
-                newRow.insertCell(3).innerText = CheckStorageCondition;
-                newRow.insertCell(4).innerText = DataReceived;
-                newRow.insertCell(5).innerText = Quantity;
-                newRow.insertCell(6).innerText = SellingPrice;
-
-                // Update chart data
-                labels.push(`Entry ${n + 1}`);
-                quantities.push(Quantity);
-                sellingPrices.push(SellingPrice);
-                n++;
+                if (editingRowIndex !== null) {
+                    // Update existing row
+                    UpdateRow(editingRowIndex, { AgriOfficerId, Date, ProductScanned, CheckStorageCondition, DataReceived, Quantity, SellingPrice });
+                    editingRowIndex = null; // Reset editing index
+                } else {
+                    // Add new row
+                    const tableBody = document.getElementById('tableBody');
+                    const newRow = tableBody.insertRow(n);
+                    InsertRowData(newRow, { AgriOfficerId, Date, ProductScanned, CheckStorageCondition, DataReceived, Quantity, SellingPrice });
+                    labels.push(`Entry ${n + 1}`);
+                    quantities.push(Quantity);
+                    sellingPrices.push(SellingPrice);
+                    n++;
+                }
 
                 myChart.data.labels = labels;
                 myChart.data.datasets[0].data = quantities;
                 myChart.data.datasets[1].data = sellingPrices;
                 myChart.update();
+                ClearInputFields();
+            }
 
-                // Clear input fields
+            function InsertRowData(row, data) {
+                row.insertCell(0).innerText = data.AgriOfficerId;
+                row.insertCell(1).innerText = data.Date;
+                row.insertCell(2).innerText = data.ProductScanned;
+                row.insertCell(3).innerText = data.CheckStorageCondition;
+                row.insertCell(4).innerText = data.DataReceived;
+                row.insertCell(5).innerText = data.Quantity;
+                row.insertCell(6).innerText = data.SellingPrice;
+
+                const actionCell = row.insertCell(7);
+                actionCell.innerHTML = `<button onclick="EditRow(${n})">Edit</button> <button onclick="DeleteRow(${n})">Delete</button>`;
+            }
+
+            function UpdateRow(index, data) {
+                const tableBody = document.getElementById('tableBody');
+                const row = tableBody.rows[index];
+
+                row.cells[0].innerText = data.AgriOfficerId;
+                row.cells[1].innerText = data.Date;
+                row.cells[2].innerText = data.ProductScanned;
+                row.cells[3].innerText = data.CheckStorageCondition;
+                row.cells[4].innerText = data.DataReceived;
+                row.cells[5].innerText = data.Quantity;
+                row.cells[6].innerText = data.SellingPrice;
+
+                // Update action buttons
+                const actionCell = row.cells[7];
+                actionCell.innerHTML = `<button onclick="EditRow(${index})">Edit</button> <button onclick="DeleteRow(${index})">Delete</button>`;
+            }
+
+            function EditRow(index) {
+                const tableBody = document.getElementById('tableBody');
+                const row = tableBody.rows[index];
+
+                document.getElementById("Agri_Officer_Employee_Id").value = row.cells[0].innerText;
+                document.getElementById("Date").value = row.cells[1].innerText;
+                document.getElementById("Product_Scanned").value = row.cells[2].innerText;
+                document.getElementById("Check_Storage_Condition").value = row.cells[3].innerText;
+                document.getElementById("Data_Received").value = row.cells[4].innerText;
+                document.getElementById("Quantity").value = row.cells[5].innerText;
+                document.getElementById("Selling_Price_Per_Kg").value = row.cells[6].innerText;
+
+                editingRowIndex = index; // Set the editing index
+            }
+
+            function DeleteRow(index) {
+                const tableBody = document.getElementById('tableBody');
+                tableBody.deleteRow(index);
+
+                // Remove corresponding data from chart arrays
+                quantities.splice(index, 1);
+                sellingPrices.splice(index, 1);
+                labels.splice(index, 1);
+                
+                // Update the remaining rows and the chart
+                for (let i = index; i < tableBody.rows.length; i++) {
+                    tableBody.rows[i].cells[7].firstChild.setAttribute('onclick', `EditRow(${i})`);
+                    tableBody.rows[i].cells[7].lastChild.setAttribute('onclick', `DeleteRow(${i})`);
+                }
+
+                myChart.data.labels = labels;
+                myChart.data.datasets[0].data = quantities;
+                myChart.data.datasets[1].data = sellingPrices;
+                myChart.update();
+            }
+
+            function ClearInputFields() {
                 document.getElementById("Agri_Officer_Employee_Id").value = '';
                 document.getElementById("Date").value = '';
                 document.getElementById("Product_Scanned").value = '';
