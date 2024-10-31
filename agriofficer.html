@@ -25,6 +25,11 @@
                 </thead>
                 <tbody>
                     <tr>
+                        <th>Date</th>
+                        <td><input type="Date" name="Date" id="Date"></td>
+                    </tr>    
+                  
+                    <tr>
                         <th>Product_Scanned</th>
                         <td><input type="text" name="Product_Scanned" id="Product_Scanned"></td>
                     </tr>
@@ -51,10 +56,11 @@
                 </tbody>
             </table>
     
-            <table border="5" id="show">
+            <table border="7" id="show">
                 <thead>
                     <tr>
                         <th>Agri_Officer_Employee_Id</th>
+                        <th>Date</th>
                         <th>Product_Scanned</th>
                         <th>Check_Storage_Condition</th>
                         <th>Data_Received</th>
@@ -75,6 +81,7 @@
 		var list4 = [];
         var list5 = [];
         var list6 = [];
+        var list7 = [];
 
 		var n = 1;
 		var x = 0;
@@ -85,18 +92,20 @@
 			var NewRow = AddRown.insertRow(n);
 
 			list1[x] = document.getElementById("Agri_Officer_Employee_Id").value;
-			list2[x] = document.getElementById("Product_Scanned").value;
-			list3[x] = document.getElementById("Check_Storage_Condition").value;
-			list4[x] = document.getElementById("Data_Received").value;
-            list5[x] = document.getElementById("Data_Received").value;
-            list6[x] = document.getElementById("Selling_Price_Per_Kg").value;
+            list2[x] = document.getElementById("Date").value;
+			list3[x] = document.getElementById("Product_Scanned").value;
+			list4[x] = document.getElementById("Check_Storage_Condition").value;
+			list5[x] = document.getElementById("Data_Received").value;
+            list6[x] = document.getElementById("Data_Received").value;
+            list7[x] = document.getElementById("Selling_Price_Per_Kg").value;
 
 			var cel1 = NewRow.insertCell(0);
 			var cel2 = NewRow.insertCell(1);
 			var cel3 = NewRow.insertCell(2);
 			var cel4 = NewRow.insertCell(3);
             var cel5 = NewRow.insertCell(4);
-            var cel6 = NewRow.insertCell(4);
+            var cel6 = NewRow.insertCell(5);
+            var cel7 = NewRow.insertCell(6);
 
 			cel1.innerHTML = list1[x];
 			cel2.innerHTML = list2[x];
@@ -104,6 +113,7 @@
 			cel4.innerHTML = list4[x];
             cel5.innerHTML = list5[x];
             cel6.innerHTML = list6[x];
+            cel7.innerHTML = list7[x];
 
 			n++;
 			x++;
