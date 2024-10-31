@@ -1,125 +1,165 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Display Selected HTML Table TR Values In Input Text</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
-        <style>
-            table tr:not(:first-child){
-                cursor: pointer;transition: all .25s ease-in-out;
-            }
-            table tr:not(:first-child):hover{background-color: #ddc2e1;}
-        </style>
-        <link rel="stylesheet" href="agriofficer_style.css">
-        
-    </head>
-    <body>
-        <center>
-            <table border="5">
-                <thead>
-                    <tr>
-                        <th>Agri_Officer_Employee_Id</th>
-                        <td><input type="text" name="Agri_Officer_Employee_Id" id="Agri_Officer_Employee_Id"></td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th>Date</th>
-                        <td><input type="Date" name="Date" id="Date"></td>
-                    </tr>    
-                  
-                    <tr>
-                        <th>Product_Scanned</th>
-                        <td><input type="text" name="Product_Scanned" id="Product_Scanned"></td>
-                    </tr>
-                    <tr>
-                        <th>Check_Storage_Condition</th>
-                        <td><input type="text" name="Check_Storage_Condition" id="Check_Storage_Condition"></td>
-                    </tr>
-                    <tr>
-                        <th>Data_Received</th>
-                        <td><input type="text" name="Data_Received" id="Data_Received"></td>
-                    </tr>
-                    <tr>
-                        <th>Quantity</th>
-                        <td><input type="text" name="Quantity" id="Quantity"></td>
-                    </tr>
-                    <tr>
-                        <th>Selling_Price_Per_Kg</th>
-                        <td><input type="text" name="Selling_Price_Per_Kg" id="Selling_Price_Per_Kg"></td>
-                    </tr>
-                    <tr id="btna">
-                        <td colspan="2"><input type="button" name="button" id="btn" value="Add" onclick="AddRow()"></td>
-                    </tr>
-                
-                </tbody>
-            </table>
-    
-            <table border="7" id="show">
-                <thead>
-                    <tr>
-                        <th>Agri_Officer_Employee_Id</th>
-                        <th>Date</th>
-                        <th>Product_Scanned</th>
-                        <th>Check_Storage_Condition</th>
-                        <th>Data_Received</th>
-                        <th>Quantity</th>
-                        <th>Selling_Price_Per_Kg</th>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agri Officer Data Entry</title>
+    <style>
+        table tr:not(:first-child) {
+            cursor: pointer; 
+            transition: all .25s ease-in-out;
+        }
+        table tr:not(:first-child):hover {
+            background-color: #ddc2e1;
+        }
+        #chartContainer {
+            width: 80%;
+            margin: 20px auto;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <center>
+        <h1>Agri Officer Data Entry</h1>
+        <table border="5">
+            <thead>
+                <tr>
+                    <th>Agri Officer Employee ID</th>
+                    <td><input type="text" id="Agri_Officer_Employee_Id"></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>Date</th>
+                    <td><input type="date" id="Date"></td>
+                </tr>
+                <tr>
+                    <th>Product Scanned</th>
+                    <td><input type="text" id="Product_Scanned"></td>
+                </tr>
+                <tr>
+                    <th>Check Storage Condition</th>
+                    <td><input type="text" id="Check_Storage_Condition"></td>
+                </tr>
+                <tr>
+                    <th>Data Received</th>
+                    <td><input type="text" id="Data_Received"></td>
+                </tr>
+                <tr>
+                    <th>Quantity</th>
+                    <td><input type="number" id="Quantity" min="0"></td>
+                </tr>
+                <tr>
+                    <th>Selling Price Per Kg</th>
+                    <td><input type="number" id="Selling_Price_Per_Kg" min="0" step="0.01"></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="button" value="Add" onclick="AddRow()"></td>
+                </tr>
+            </tbody>
+        </table>
 
-                    </tr>
-                </thead>
-            </table>
-        <table id="table" border="1">
-        </center>
-          
+        <table border="7" id="show">
+            <thead>
+                <tr>
+                    <th>Agri Officer Employee ID</th>
+                    <th>Date</th>
+                    <th>Product Scanned</th>
+                    <th>Check Storage Condition</th>
+                    <th>Data Received</th>
+                    <th>Quantity</th>
+                    <th>Selling Price Per Kg</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+        </table>
+
+        <div id="chartContainer">
+            <canvas id="myChart"></canvas>
+        </div>
+
         <script>
-    
-    var list1 = [];
-		var list2 = [];
-		var list3 = [];
-		var list4 = [];
-        var list5 = [];
-        var list6 = [];
-        var list7 = [];
+            let quantities = [];
+            let sellingPrices = [];
+            let labels = [];
+            let n = 0;
 
-		var n = 1;
-		var x = 0;
+            const ctx = document.getElementById('myChart').getContext('2d');
+            const myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Quantity',
+                            data: quantities,
+                            backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                        },
+                        {
+                            label: 'Selling Price per Kg',
+                            data: sellingPrices,
+                            backgroundColor: 'rgba(153, 102, 255, 0.5)',
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
 
-		function AddRow(){
+            function AddRow() {
+                const AgriOfficerId = document.getElementById("Agri_Officer_Employee_Id").value;
+                const Date = document.getElementById("Date").value;
+                const ProductScanned = document.getElementById("Product_Scanned").value;
+                const CheckStorageCondition = document.getElementById("Check_Storage_Condition").value;
+                const DataReceived = document.getElementById("Data_Received").value;
+                const Quantity = parseFloat(document.getElementById("Quantity").value);
+                const SellingPrice = parseFloat(document.getElementById("Selling_Price_Per_Kg").value);
 
-			var AddRown = document.getElementById('show');
-			var NewRow = AddRown.insertRow(n);
+                // Validate input
+                if (!AgriOfficerId || !Date || !ProductScanned || !CheckStorageCondition || !DataReceived || isNaN(Quantity) || isNaN(SellingPrice)) {
+                    alert("Please fill in all fields with valid data.");
+                    return;
+                }
 
-			list1[x] = document.getElementById("Agri_Officer_Employee_Id").value;
-            list2[x] = document.getElementById("Date").value;
-			list3[x] = document.getElementById("Product_Scanned").value;
-			list4[x] = document.getElementById("Check_Storage_Condition").value;
-			list5[x] = document.getElementById("Data_Received").value;
-            list6[x] = document.getElementById("Data_Received").value;
-            list7[x] = document.getElementById("Selling_Price_Per_Kg").value;
+                // Add data to the table
+                const tableBody = document.getElementById('tableBody');
+                const newRow = tableBody.insertRow(n);
+                newRow.insertCell(0).innerText = AgriOfficerId;
+                newRow.insertCell(1).innerText = Date;
+                newRow.insertCell(2).innerText = ProductScanned;
+                newRow.insertCell(3).innerText = CheckStorageCondition;
+                newRow.insertCell(4).innerText = DataReceived;
+                newRow.insertCell(5).innerText = Quantity;
+                newRow.insertCell(6).innerText = SellingPrice;
 
-			var cel1 = NewRow.insertCell(0);
-			var cel2 = NewRow.insertCell(1);
-			var cel3 = NewRow.insertCell(2);
-			var cel4 = NewRow.insertCell(3);
-            var cel5 = NewRow.insertCell(4);
-            var cel6 = NewRow.insertCell(5);
-            var cel7 = NewRow.insertCell(6);
+                // Update chart data
+                labels.push(`Entry ${n + 1}`);
+                quantities.push(Quantity);
+                sellingPrices.push(SellingPrice);
+                n++;
 
-			cel1.innerHTML = list1[x];
-			cel2.innerHTML = list2[x];
-			cel3.innerHTML = list3[x];
-			cel4.innerHTML = list4[x];
-            cel5.innerHTML = list5[x];
-            cel6.innerHTML = list6[x];
-            cel7.innerHTML = list7[x];
+                myChart.data.labels = labels;
+                myChart.data.datasets[0].data = quantities;
+                myChart.data.datasets[1].data = sellingPrices;
+                myChart.update();
 
-			n++;
-			x++;
-		}
-
-	</script>
-        
-    </body>
+                // Clear input fields
+                document.getElementById("Agri_Officer_Employee_Id").value = '';
+                document.getElementById("Date").value = '';
+                document.getElementById("Product_Scanned").value = '';
+                document.getElementById("Check_Storage_Condition").value = '';
+                document.getElementById("Data_Received").value = '';
+                document.getElementById("Quantity").value = '';
+                document.getElementById("Selling_Price_Per_Kg").value = '';
+            }
+        </script>
+    </center>
+</body>
 </html>
