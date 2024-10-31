@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Display Selected HTML Table TR Values In Input Text</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <style>
+            table tr:not(:first-child){
+                cursor: pointer;transition: all .25s ease-in-out;
+            }
+            table tr:not(:first-child):hover{background-color: #ddc2e1;}
+        </style>
+        <link rel="stylesheet" href="agriofficer_style.css">
+        
+    </head>
+    <body>
+        <center>
+            <table border="5">
+                <thead>
+                    <tr>
+                        <th>Agri_Officer_Employee_Id</th>
+                        <td><input type="text" name="Agri_Officer_Employee_Id" id="Agri_Officer_Employee_Id"></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>Product_Scanned</th>
+                        <td><input type="text" name="Product_Scanned" id="Product_Scanned"></td>
+                    </tr>
+                    <tr>
+                        <th>Check_Storage_Condition</th>
+                        <td><input type="text" name="Check_Storage_Condition" id="Check_Storage_Condition"></td>
+                    </tr>
+                    <tr>
+                        <th>Data_Received</th>
+                        <td><input type="text" name="Data_Received" id="Data_Received"></td>
+                    </tr>
+                    <tr>
+                        <th>Quantity</th>
+                        <td><input type="text" name="Quantity" id="Quantity"></td>
+                    </tr>
+                    <tr>
+                        <th>Selling_Price_Per_Kg</th>
+                        <td><input type="text" name="Selling_Price_Per_Kg" id="Selling_Price_Per_Kg"></td>
+                    </tr>
+                    <tr id="btna">
+                        <td colspan="2"><input type="button" name="button" id="btn" value="Add" onclick="AddRow()"></td>
+                    </tr>
+                
+                </tbody>
+            </table>
+    
+            <table border="5" id="show">
+                <thead>
+                    <tr>
+                        <th>Agri_Officer_Employee_Id</th>
+                        <th>Product_Scanned</th>
+                        <th>Check_Storage_Condition</th>
+                        <th>Data_Received</th>
+                        <th>Quantity</th>
+                        <th>Selling_Price_Per_Kg</th>
+
+                    </tr>
+                </thead>
+            </table>
+        <table id="table" border="1">
+        </center>
+          
+        <script>
+    
+    var list1 = [];
+		var list2 = [];
+		var list3 = [];
+		var list4 = [];
+        var list5 = [];
+        var list6 = [];
+
+		var n = 1;
+		var x = 0;
+
+		function AddRow(){
+
+			var AddRown = document.getElementById('show');
+			var NewRow = AddRown.insertRow(n);
+
+			list1[x] = document.getElementById("Agri_Officer_Employee_Id").value;
+			list2[x] = document.getElementById("Product_Scanned").value;
+			list3[x] = document.getElementById("Check_Storage_Condition").value;
+			list4[x] = document.getElementById("Data_Received").value;
+            list5[x] = document.getElementById("Data_Received").value;
+            list6[x] = document.getElementById("Selling_Price_Per_Kg").value;
+
+			var cel1 = NewRow.insertCell(0);
+			var cel2 = NewRow.insertCell(1);
+			var cel3 = NewRow.insertCell(2);
+			var cel4 = NewRow.insertCell(3);
+            var cel5 = NewRow.insertCell(4);
+            var cel6 = NewRow.insertCell(4);
+
+			cel1.innerHTML = list1[x];
+			cel2.innerHTML = list2[x];
+			cel3.innerHTML = list3[x];
+			cel4.innerHTML = list4[x];
+            cel5.innerHTML = list5[x];
+            cel6.innerHTML = list6[x];
+
+			n++;
+			x++;
+		}
+
+	</script>
+        
+    </body>
+</html>
