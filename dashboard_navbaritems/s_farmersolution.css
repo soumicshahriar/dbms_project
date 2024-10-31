@@ -12,7 +12,7 @@
  justify-content: center;
 }
 .container .img{
- background: url(/dashboard_navbaritems/images/carrot.webp);
+ background: url(/dashboard_navbaritems/images/farmer.jpg);
  height: 600px;
  width: 100%;
  position: absolute;
@@ -27,7 +27,7 @@
  height: 600px;
  opacity: 0.7;
  width: 100%;
- background: linear-gradient(to bottom, red,blue);
+ background: linear-gradient(to bottom, red,green);
  position: absolute;
  border: 1px solid black;
  border-radius: 5%;
@@ -36,4 +36,8 @@
  z-index: 2;
  text-align: center;
  color: white;
+}
+.card{
+ text-align: center;
+ box-shadow: 8px 4px 5px  green inset;
 }
