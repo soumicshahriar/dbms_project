@@ -10,7 +10,7 @@
 <body>
  <div class="container" id="main">
   <div class="sign-up">
-   <form action="#">
+   <form action="/registration.php" method="post">
     <h1>Create Account</h1>
     <div class="social-container">
      <a href="#" class="social"><i class="fa-brands fa-facebook"></i></a>
@@ -21,19 +21,21 @@
     <input type="text" name="text" placeholder="Name" required="">
     <input type="email" name="email" placeholder="Email" required="">
     <input type="password" name="password" placeholder="Password" required="">
-    <select class="form-select form-select-sm" aria-label="Small select example">
+    <select name="employee" class="form-select form-select-sm" aria-label="Small select example">
      <option selected>Select EMPLOYEE</option>
-     <option value="1">MANAGER</option>
-     <option value="2">FOOD_QUALITY_OFFICER</option>
-     <option value="3">FARMER</option>
-     <option value="4">AGGRICULTURE_OFFICER</option>
-     <option value="5">MARKET_MANAGER</option>
-     <option value="6">WARHOUSE_MANAGER</option>
-     <option value="7">CUSTOMER</option>
+     <option value="MANAGER">MANAGER</option>
+     <option value="FOOD_QUALITY_OFFICER">FOOD_QUALITY_OFFICER</option>
+     <option value="FARMER">FARMER</option>
+     <option value="AGGRICULTURE_OFFICER">AGGRICULTURE_OFFICER</option>
+     <option value="MARKET_MANAGER">MARKET_MANAGER</option>
+     <option value="WARHOUSE_MANAGER">WARHOUSE_MANAGER</option>
+     <option value="CUSTOMER">CUSTOMER</option>
     </select>
-    <button>sign-Up</button>
+    <button name="">sign-Up</button>
    </form>
   </div>
+
+  <!-- sign in form -->
   <div class="sign-in">
    <form action="#">
     <h1>Sign In</h1>
