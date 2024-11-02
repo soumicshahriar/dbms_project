@@ -1,0 +1,66 @@
+*{
+ margin: 0;
+ padding: 0;
+}
+.container{
+ position: relative;
+ display: flex;
+ /* margin-top: -40px; */
+ min-height: 100vh;
+ /* background: #040124; */
+ align-items: center;
+ justify-content: center;
+}
+.container .img{
+ background: url(/dashboard_navbaritems/images/IoT.avif);
+ height: 600px;
+ width: 100%;
+ position: absolute;
+ background-size: cover;
+ background-position: center;
+ border: 1px solid black;
+ border-radius: 5%;
+
+}
+
+.container .overlay{
+ height: 600px;
+ opacity: 0.7;
+ width: 100%;
+ background: linear-gradient(to bottom,white,green);
+ position: absolute;
+ border: 1px solid black;
+ border-radius: 5%;
+}
+.text{
+ z-index: 2;
+ text-align: center;
+ color: white;
+}
+.card-body{
+ display:flex;
+ align-items: center;
+ padding: 3%;
+ margin: 5%;
+ box-shadow: 8px 4px 5px  green inset;
+}
+.card{
+ align-items: center;
+margin: 5%;
+ box-shadow: 8px 4px 5px  green inset;
+}
+.card-p{
+ max-width: 50%;
+ padding: 5%;
+ align-items: center;
+margin: 5%;
+ box-shadow: 8px 4px 5px  green inset;
+}
+.card-p2{
+ max-width: 50%;
+ padding: 5%;
+ align-items: center;
+ margin: 5%;
+margin-left: 50%;
+ box-shadow: 8px 4px 5px  green inset;
+}
