@@ -15,8 +15,9 @@
   transform: translate(-50%, 0);
   max-width: 1280px;
   width: 100%;
-  background: #10182F;
-  border-radius: 6px;
+  background: linear-gradient(270deg, #5ed1d7, #02f2ff, #00ffe5, #0dffeb, #00f8db);
+  border: 5px solid gray;
+  border-block-color: #bebebe;
 }
 
 .footer .footer-row {
@@ -44,7 +45,7 @@
 
 .footer-col .links li a {
   text-decoration: none;
-  color: #bfbfbf;
+ 
 }
 
 .footer-col .links li a:hover {
