@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agri Officer Data Entry</title>
-    <link rel="stylesheet" href="agriofficer_style.css">
+    <title>Warehouse Data Entry</title>
+    <link rel="stylesheet" href="warehouse_style.css">
     <style>
         /* Add motion background color effect */
         @keyframes gradientAnimation {
@@ -36,7 +36,7 @@
 
         h1 {
             text-align: center;
-            color: rgb(41, 33, 33);
+            color: white;
             font-size: 32px;
             margin-top: 40px;
             font-family: 'Arial', sans-serif;
@@ -54,6 +54,7 @@
             padding: 12px;
             text-align: center;
             border: 1px solid #ddd;
+            color: black;  /* Set table data color to black */
         }
 
         th {
@@ -82,7 +83,7 @@
 
         input[type="button"] {
             background-color: #3498db;
-            color: rgb(21, 12, 12);
+            color: white;
             cursor: pointer;
             font-size: 16px;
         }
@@ -95,7 +96,7 @@
             padding: 6px 12px;
             background-color: #f39c12;
             border: none;
-            color: rgb(18, 13, 13);
+            color: white;
             font-size: 14px;
             margin: 5px;
             cursor: pointer;
@@ -130,58 +131,54 @@
 </head>
 <body>
     <div class="form-container">
-        <h1>Agri Officer Data Entry</h1>
+        <h1>Warehouse Data Entry</h1>
 
         <table>
             <thead>
                 <tr>
-                    <th>Agri Officer Employee ID</th>
-                    <td><input type="text" id="Agri_Officer_Employee_Id"></td>
+                    <th>Warehouse ID</th>
+                    <td><input type="text" id="Warehouse_Id"></td>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <th>Date</th>
-                    <td><input type="date" id="Date"></td>
-                </tr>
-                <tr>
-                    <th>Product Scanned</th>
+                    <th>Stored Crops</th>
                     <td>
-                        <select id="Product_Scanned">
-                            <option value="">Select</option>
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
+                        <select id="Stored_Crops">
+                            <option value="">Select Crop</option>
+                            <option value="Wheat">Wheat</option>
+                            <option value="Jute">Jute</option>
+                            <option value="Rice">Rice</option>
+                            <option value="Potato">Potato</option>
+                            <option value="Tomato">Tomato</option>
+                            <option value="Carrot">Carrot</option>
+                            <option value="Onion">Onion</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
-                    <th>Check Storage Condition</th>
+                    <th>Total Quantity (Kg)</th>
+                    <td><input type="number" id="Total_Quantity" min="0"></td>
+                </tr>
+                <tr>
+                    <th>Store Location</th>
                     <td>
-                        <select id="Check_Storage_Condition">
-                            <option value="">Select</option>
-                            <option value="Good">Good</option>
-                            <option value="Average">Average</option>
-                            <option value="Below">Below</option>
+                        <select id="Store_Location">
+                            <option value="">Select Location</option>
+                            <option value="Farm Area A, North Zone">Farm Area A, North Zone</option>
+                            <option value="Farm Area B, South Zone">Farm Area B, South Zone</option>
+                            <option value="Farm Area C, East Zone">Farm Area C, East Zone</option>
+                            <option value="Farm Area D, West Zone">Farm Area D, West Zone</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
-                    <th>Data Received</th>
-                    <td>
-                        <select id="Data_Received">
-                            <option value="">Select</option>
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
-                        </select>
-                    </td>
+                    <th>Quantity Available (Kg)</th>
+                    <td><input type="number" id="Quantity_Available" min="0"></td>
                 </tr>
                 <tr>
-                    <th>Quantity</th>
-                    <td><input type="number" id="Quantity" min="0"></td>
-                </tr>
-                <tr>
-                    <th>Selling Price Per Kg</th>
-                    <td><input type="number" id="Selling_Price" min="0" step="0.01"></td>
+                    <th>Warehouse Manager Employee ID</th>
+                    <td><input type="text" id="Manager_Id"></td>
                 </tr>
                 <tr>
                     <td colspan="2"><input type="button" value="Add" onclick="AddRow()"></td>
@@ -192,13 +189,12 @@
         <table border="7" id="show">
             <thead>
                 <tr>
-                    <th>Agri Officer Employee ID</th>
-                    <th>Date</th>
-                    <th>Product Scanned</th>
-                    <th>Check Storage Condition</th>
-                    <th>Data Received</th>
-                    <th>Quantity</th>
-                    <th>Selling Price</th>
+                    <th>Warehouse ID</th>
+                    <th>Stored Crops</th>
+                    <th>Total Quantity</th>
+                    <th>Store Location</th>
+                    <th>Quantity Available</th>
+                    <th>Warehouse Manager Employee ID</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -212,7 +208,7 @@
 
     <script>
         let quantities = [];
-        let sellingPrices = [];
+        let totalQuantities = [];
         let labels = [];
         let n = 0;
         let editingRowIndex = null;
@@ -224,15 +220,15 @@
                 labels: labels,
                 datasets: [
                     {
-                        label: 'Quantity (Kg)',
+                        label: 'Quantity Available (Kg)',
                         data: quantities,
                         backgroundColor: 'rgba(75, 192, 192, 0.7)',
                         borderColor: 'rgba(75, 192, 192, 1)',
                         borderWidth: 1,
                     },
                     {
-                        label: 'Selling Price (per Kg)',
-                        data: sellingPrices,
+                        label: 'Total Quantity (Kg)',
+                        data: totalQuantities,
                         backgroundColor: 'rgba(153, 102, 255, 0.7)',
                         borderColor: 'rgba(153, 102, 255, 1)',
                         borderWidth: 1,
@@ -263,52 +259,50 @@
         });
 
         function AddRow() {
-            const AgriOfficerId = document.getElementById("Agri_Officer_Employee_Id").value;
-            const Date = document.getElementById("Date").value;
-            const ProductScanned = document.getElementById("Product_Scanned").value;
-            const CheckStorageCondition = document.getElementById("Check_Storage_Condition").value;
-            const DataReceived = document.getElementById("Data_Received").value;
-            const Quantity = parseFloat(document.getElementById("Quantity").value);
-            const SellingPrice = parseFloat(document.getElementById("Selling_Price").value);
+            const WarehouseId = document.getElementById("Warehouse_Id").value;
+            const StoredCrops = document.getElementById("Stored_Crops").value;
+            const TotalQuantity = parseFloat(document.getElementById("Total_Quantity").value);
+            const StoreLocation = document.getElementById("Store_Location").value;
+            const QuantityAvailable = parseFloat(document.getElementById("Quantity_Available").value);
+            const ManagerId = document.getElementById("Manager_Id").value;
 
             // Validate input
-            if (!AgriOfficerId || !Date || !ProductScanned || !CheckStorageCondition || !DataReceived || isNaN(Quantity) || isNaN(SellingPrice)) {
+            if (!WarehouseId || !StoredCrops || !TotalQuantity || !StoreLocation || !QuantityAvailable || !ManagerId) {
                 alert("Please fill in all fields with valid data.");
                 return;
             }
 
             if (editingRowIndex !== null) {
                 // Update existing row
-                UpdateRow(editingRowIndex, { AgriOfficerId, Date, ProductScanned, CheckStorageCondition, DataReceived, Quantity, SellingPrice });
+                UpdateRow(editingRowIndex, { WarehouseId, StoredCrops, TotalQuantity, StoreLocation, QuantityAvailable, ManagerId });
                 editingRowIndex = null; // Reset editing index
             } else {
                 // Add new row
                 const tableBody = document.getElementById('tableBody');
                 const newRow = tableBody.insertRow(n);
-                InsertRowData(newRow, { AgriOfficerId, Date, ProductScanned, CheckStorageCondition, DataReceived, Quantity, SellingPrice });
+                InsertRowData(newRow, { WarehouseId, StoredCrops, TotalQuantity, StoreLocation, QuantityAvailable, ManagerId });
                 labels.push(`Entry ${n + 1}`);
-                quantities.push(Quantity);
-                sellingPrices.push(SellingPrice);
+                quantities.push(QuantityAvailable);
+                totalQuantities.push(TotalQuantity);
                 n++;
             }
 
             myChart.data.labels = labels;
             myChart.data.datasets[0].data = quantities;
-            myChart.data.datasets[1].data = sellingPrices;
+            myChart.data.datasets[1].data = totalQuantities;
             myChart.update();
             ClearInputFields();
         }
 
         function InsertRowData(row, data) {
-            row.insertCell(0).innerText = data.AgriOfficerId;
-            row.insertCell(1).innerText = data.Date;
-            row.insertCell(2).innerText = data.ProductScanned;
-            row.insertCell(3).innerText = data.CheckStorageCondition;
-            row.insertCell(4).innerText = data.DataReceived;
-            row.insertCell(5).innerText = data.Quantity;
-            row.insertCell(6).innerText = data.SellingPrice;
+            row.insertCell(0).innerText = data.WarehouseId;
+            row.insertCell(1).innerText = data.StoredCrops;
+            row.insertCell(2).innerText = data.TotalQuantity;
+            row.insertCell(3).innerText = data.StoreLocation;
+            row.insertCell(4).innerText = data.QuantityAvailable;
+            row.insertCell(5).innerText = data.ManagerId;
 
-            const actionCell = row.insertCell(7);
+            const actionCell = row.insertCell(6);
             actionCell.classList.add('actions');
             actionCell.innerHTML = `<button onclick="EditRow(${n})">Update</button> <button onclick="DeleteRow(${n})">Delete</button>`;
         }
@@ -317,29 +311,35 @@
             const tableBody = document.getElementById('tableBody');
             const row = tableBody.rows[index];
 
-            row.cells[0].innerText = data.AgriOfficerId;
-            row.cells[1].innerText = data.Date;
-            row.cells[2].innerText = data.ProductScanned;
-            row.cells[3].innerText = data.CheckStorageCondition;
-            row.cells[4].innerText = data.DataReceived;
-            row.cells[5].innerText = data.Quantity;
-            row.cells[6].innerText = data.SellingPrice;
+            row.cells[0].innerText = data.WarehouseId;
+            row.cells[1].innerText = data.StoredCrops;
+            row.cells[2].innerText = data.TotalQuantity;
+            row.cells[3].innerText = data.StoreLocation;
+            row.cells[4].innerText = data.QuantityAvailable;
+            row.cells[5].innerText = data.ManagerId;
 
-            const actionCell = row.cells[7];
+            const actionCell = row.cells[6];
             actionCell.innerHTML = `<button onclick="EditRow(${index})">Update</button> <button onclick="DeleteRow(${index})">Delete</button>`;
+
+            // Update chart with the new data
+            quantities[index] = data.QuantityAvailable;
+            totalQuantities[index] = data.TotalQuantity;
+
+            myChart.data.datasets[0].data = quantities;
+            myChart.data.datasets[1].data = totalQuantities;
+            myChart.update();
         }
 
         function EditRow(index) {
             const tableBody = document.getElementById('tableBody');
             const row = tableBody.rows[index];
 
-            document.getElementById("Agri_Officer_Employee_Id").value = row.cells[0].innerText;
-            document.getElementById("Date").value = row.cells[1].innerText;
-            document.getElementById("Product_Scanned").value = row.cells[2].innerText;
-            document.getElementById("Check_Storage_Condition").value = row.cells[3].innerText;
-            document.getElementById("Data_Received").value = row.cells[4].innerText;
-            document.getElementById("Quantity").value = row.cells[5].innerText;
-            document.getElementById("Selling_Price").value = row.cells[6].innerText;
+            document.getElementById("Warehouse_Id").value = row.cells[0].innerText;
+            document.getElementById("Stored_Crops").value = row.cells[1].innerText;
+            document.getElementById("Total_Quantity").value = row.cells[2].innerText;
+            document.getElementById("Store_Location").value = row.cells[3].innerText;
+            document.getElementById("Quantity_Available").value = row.cells[4].innerText;
+            document.getElementById("Manager_Id").value = row.cells[5].innerText;
 
             editingRowIndex = index; // Set the editing index
         }
@@ -349,28 +349,27 @@
             tableBody.deleteRow(index);
 
             quantities.splice(index, 1);
-            sellingPrices.splice(index, 1);
+            totalQuantities.splice(index, 1);
             labels.splice(index, 1);
 
             for (let i = index; i < tableBody.rows.length; i++) {
-                tableBody.rows[i].cells[7].firstChild.setAttribute('onclick', `EditRow(${i})`);
-                tableBody.rows[i].cells[7].lastChild.setAttribute('onclick', `DeleteRow(${i})`);
+                tableBody.rows[i].cells[6].firstChild.setAttribute('onclick', `EditRow(${i})`);
+                tableBody.rows[i].cells[6].lastChild.setAttribute('onclick', `DeleteRow(${i})`);
             }
 
             myChart.data.labels = labels;
             myChart.data.datasets[0].data = quantities;
-            myChart.data.datasets[1].data = sellingPrices;
+            myChart.data.datasets[1].data = totalQuantities;
             myChart.update();
         }
 
         function ClearInputFields() {
-            document.getElementById("Agri_Officer_Employee_Id").value = '';
-            document.getElementById("Date").value = '';
-            document.getElementById("Product_Scanned").value = '';
-            document.getElementById("Check_Storage_Condition").value = '';
-            document.getElementById("Data_Received").value = '';
-            document.getElementById("Quantity").value = '';
-            document.getElementById("Selling_Price").value = '';
+            document.getElementById("Warehouse_Id").value = '';
+            document.getElementById("Stored_Crops").value = '';
+            document.getElementById("Total_Quantity").value = '';
+            document.getElementById("Store_Location").value = '';
+            document.getElementById("Quantity_Available").value = '';
+            document.getElementById("Manager_Id").value = '';
         }
     </script>
 </body>
