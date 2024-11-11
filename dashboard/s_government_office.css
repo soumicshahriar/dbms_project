@@ -21,7 +21,7 @@
 }
 
 .footer .footer-row {
-  background: linear-gradient(270deg, #5ed1d7, #02f2ff, #00ffe5, #0dffeb, #00f8db);
+  background: linear-gradient(270deg, #02f2ff, #02f2ff, #02f2ff, #02f2ff,#02f2ff);
  display: flex;
  flex-wrap: wrap;
  justify-content: space-between;
@@ -46,7 +46,7 @@
 
 .footer-col .links li a {
  text-decoration: none;
- color: #bfbfbf;
+ color: #0055ff;
 }
 
 .footer-col .links li a:hover {

@@ -16,9 +16,15 @@
    padding: 0;
    box-sizing: border-box;
    font-family: Arial, sans-serif;
-  }
 
-  /* Navbar styling */
+  }
+  body {
+    width: 100%;
+    margin: auto;
+    background: linear-gradient(270deg, #02f2ff, #02f2ff, #02f2ff, #02f2ff,#02f2ff);
+   }
+
+  /* nav style */
   .navbar-p {
 
    margin: 1em;
@@ -28,38 +34,52 @@
 
   .container-fluid {
 
-   background: linear-gradient(to bottom, rgb(0, 21, 255), rgb(156, 152, 152));
-   color: #fff;
-   padding: 1em;
-   border: 1px solid black;
-   border-radius: 5%;
-   font-size: 1.5em;
+    background: linear-gradient(270deg, #02f2ff, #02f2ff, #02f2ff, #02f2ff,#02f2ff);
+    background-size: 400% 400%;
+    color: #fff;
+    padding: 1em;
+    border: 5px solid gray;
+    border-block-color: #03fbff;
+    border-radius: 10%;
+    font-size: 1.5em;
   }
 
-  .nav-item a:hover {
-   background: linear-gradient(to bottom, rgb(234, 235, 243), rgb(0, 0, 0));
-   width: fit-content;
-   padding: 1%;
-   border: 1px solid black;
-   border-radius: 5%;
-  }
-
-  .dropdown-menu {
-   background: linear-gradient(to bottom, rgb(0, 21, 255), rgb(156, 152, 152));
-   color: #fff;
-   padding: 1em;
-   border: 1px solid black;
-   border-radius: 5%;
-
-  }
-
-  .dropdown-menu:hover {
-   color: linear-gradient(to bottom, rgb(234, 235, 243), rgb(0, 0, 0));
-   width: fit-content;
-   padding: 1%;
-   border: 1px solid black;
-   border-radius: 5%;
-  }
+  .nav-item a {
+    color: white;
+    width: fit-content;
+    padding: 1%;
+    margin: 1%;
+    border: 5px solid #03fbff;
+    border-block-color: gray;
+    border-radius: 5%;
+   }
+ 
+   .nav-item a:hover {
+    background: linear-gradient(270deg, #02f2ff, #02f2ff, #02f2ff, #02f2ff,#02f2ff);
+    color: white;
+    width: fit-content;
+    padding: 1%;
+    border: 5px solid #03fbff;
+    border-block-color: gray;
+    border-radius: 50%;
+   }
+ 
+   .dropdown-menu {
+    background: linear-gradient(270deg, #02f2ff, #02f2ff, #02f2ff, #02f2ff,#02f2ff);
+    color: #fff;
+    padding: 1em;
+    border: 1px solid black;
+    border-radius: 5%;
+ 
+   }
+ 
+   .dropdown-menu:hover {
+    color: linear-gradient(to bottom, rgb(234, 235, 243), rgb(0, 0, 0));
+    width: fit-content;
+    padding: 1%;
+    border: 1px solid black;
+    border-radius: 5%;
+   }
 
   /* Image section styling */
   .container-img {
@@ -80,7 +100,9 @@
    background-size: cover;
    background-position: center;
    border: 1px solid black;
-   border-radius: 5%;
+   border: 5px solid gray;
+   border-block-color: #03fbff;
+   border-radius: 10%;
 
   }
 
@@ -88,10 +110,12 @@
    height: 600px;
    opacity: 0.7;
    width: 96%;
-   background: linear-gradient(to bottom, rgb(0, 21, 255), rgb(0, 0, 0));
    position: absolute;
-   border: 1px solid black;
-   border-radius: 5%;
+
+   background: linear-gradient(270deg, #02f2ff, #02f2ff, #02f2ff, #02f2ff,#02f2ff);
+   border: 5px solid gray;
+   border-block-color: #03fbff;
+   border-radius: 10%;
   }
 
 
@@ -105,47 +129,85 @@
   /* Form styling */
   /* Enhanced Form Styling */
   .form-container {
-   background: linear-gradient(to bottom, rgb(78, 28, 240), rgb(24, 23, 23));
-   padding: 25px;
-   border-radius: 8px;
-   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-   margin-bottom: 20px;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 20%;
+    border: 5px solid gray;
+    border-block-color: #03fbff;
+    background: linear-gradient(270deg, #02f2ff, #02f2ff, #02f2ff, #02f2ff,#02f2ff);
+    background-size: 400% 400%;
+    text-align: center;
+    color: white;
+    width: 90%;
+    padding: 4%;
+    margin: auto;
   }
 
-  .form-group {
-   display: flex;
-   flex-direction: column;
-   margin-bottom: 20px;
-   background: linear-gradient(to bottom, gray, white);
+  .form-group{
+    transform: scale(1.00);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+    margin-bottom:5%;
+  }
+  .form-group:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+    margin-bottom:5%;
   }
 
   .form-group label {
-   margin-bottom: 5px;
-   font-weight: 600;
-   color: #fafafa;
-  }
-
-  .form-group input {
-   padding: 10px;
-   border: 2px solid black;
-   border-radius: 5px;
-   width: 100%;
-   font-size: 1em;
-   color: #333;
-   transition: border-color 0.3s;
-  }
-
-  .form-group input:hover {
-   padding: 10px;
-   border: 2px solid black;
-   border-radius: 5px;
-   width: 100%;
-   font-size: 1em;
-   color: #333;
-   color: #ffffff;
-   background: linear-gradient(to bottom, rgb(255, 255, 255), rgb(0, 0, 0));
-   transition: border-color 0.3s;
-  }
+    display: block;
+    margin-bottom: 5px;
+    background: linear-gradient(to bottom, rgb(196, 201, 214), rgb(0, 0, 0));
+   }
+ 
+   .form-group input {
+    background: linear-gradient(to bottom, rgb(128, 129, 135), rgb(0, 0, 0));
+    color: rgb(0, 0, 0);
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+   }
+ 
+  .form-group input:hover{
+    background: linear-gradient(270deg, #02f2ff, #02f2ff, #02f2ff, #02f2ff,#02f2ff);
+    padding: 2%;
+    width: 100%;
+    margin-bottom: 10px;
+    margin-right: 5%;
+    padding: 5px;
+    background-color: gray;
+    border: 5px solid #03fbff;
+    border-block-color: gray;
+    border-radius: 50%;
+    text-align: center;
+ 
+   }
+   .form-group select{
+     background: linear-gradient(to bottom, rgb(128, 129, 135), rgb(0, 0, 0));
+    color: rgb(255, 255, 255);
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+   }
+   .form-group select:hover{
+    background: linear-gradient(270deg, #02f2ff, #02f2ff, #02f2ff, #02f2ff,#02f2ff);
+    padding: 2%;
+    width: 100%;
+    margin-bottom: 10px;
+    margin-right: 5%;
+    padding: 5px;
+    color: black;
+    background-color: gray; 
+    
+   }
+   .food_quality-officer {
+     border: 5px solid gray;
+     border-block-color: #bebebe;
+     text-align: center;
+     margin: 2%;
+    }
 
   .form-group input:focus {
    border-color: #005792;
@@ -155,10 +217,10 @@
   button {
    background-color: #005792;
    color: #ffffff;
-   padding: 10px 20px;
+   padding: 2%;
    font-size: 1em;
    border: none;
-   border-radius: 5px;
+   border-radius:15%;
    color: #ffffff;
    background: linear-gradient(to bottom, rgb(255, 255, 255), rgb(0, 0, 0));
    cursor: pointer;
@@ -166,8 +228,13 @@
   }
 
   button:hover {
-   color: #ffffff;
-   background: linear-gradient(to bottom, rgb(0, 68, 255), rgb(0, 0, 0));
+    margin: 2%;
+    padding: 1%;
+    background: linear-gradient(270deg, #02f2ff, #02f2ff, #02f2ff, #02f2ff,#02f2ff);
+    border: 5px solid gray;
+    border-block-color: #03fbff;
+    border-radius: 25%;
+    background-color: gray;
   }
 
   /* Error Message Styling */
@@ -183,23 +250,27 @@
 
   /* Table styling */
   .data-table {
-   width: 100%;
-   border-collapse: collapse;
-   margin-bottom: 20px;
+    border: 5px solid gray;
+    border-block-color: #03fbff;
+    width: 90%;
+    margin: auto;
+    border-collapse: collapse;
+    margin-top: 20px;
+ 
   }
 
   .data-table th,
   .data-table td {
-   padding: 10px;
-   border: 1px solid #ffffff;
-   background: linear-gradient(to bottom, rgb(79, 124, 249), rgb(100, 98, 98));
-   text-align: left;
-  }
+    background: linear-gradient(270deg, #02f2ff, #02f2ff, #02f2ff, #02f2ff,#02f2ff);
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;}
 
   .data-table th {
-   background-color: #005792;
-   color: #fff;
-   background: linear-gradient(to bottom, rgb(0, 68, 255), rgb(0, 0, 0));
+    background: linear-gradient(270deg, #02f2ff, #02f2ff, #02f2ff, #02f2ff,#02f2ff);
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
 
   }
 
@@ -226,6 +297,13 @@
    font-size: 0.9em;
    margin-top: 5px;
   }
+
+  .government-officer{
+    border: 5px solid gray;
+    border-block-color: #bebebe;
+    text-align: center;
+    margin: 2%;
+  }
  </style>
 </head>
 
@@ -234,7 +312,7 @@
  <!-- Navbar -->
  <div>
   <div class="navbar-p">
-   <nav class="navbar navbar-expand-lg bg-body-tertiary">
+   <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
      <a class="navbar-brand" href="#"><i class="fa-solid fa-wheat-awn"></i> AGRIVI</a>
      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
@@ -270,6 +348,7 @@
   </div>
  </div>
 
+ <h1 class="government-officer">Government Officer Dashboard</h1>
  <!-- Image Section -->
  <div class="container-img">
   <div class="img"></div>
