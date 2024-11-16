@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agricultural Employee Dashboard</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #74ebd5 0%, #9face6 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        header {
+            background-color: #34495e;
+            padding: 20px;
+            color: white;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 0.2em;
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.7;
+        }
+
+        /* Dashboard Boxes */
+        .dashboard-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin-bottom: 30px;
+        }
+
+        .box {
+            background-color: #16a085;
+            color: white;
+            width: 30%;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 15px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .box h2 {
+            font-size: 1.8em;
+            margin-bottom: 0.5em;
+        }
+
+        .box p {
+            font-size: 1.5em;
+        }
+
+        .btn {
+            background-color: #2980b9;
+            color: white;
+            padding: 12px 20px;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #3498db;
+            transform: scale(1.1);
+        }
+
+        .motion-btn {
+            animation: colorChange 3s infinite alternate;
+        }
+
+        @keyframes colorChange {
+            0% { background-color: #FF5733; }
+            25% { background-color: #33FF57; }
+            50% { background-color: #3357FF; }
+            75% { background-color: #FFBB33; }
+            100% { background-color: #FF5733; }
+        }
+
+        /* Table Styles */
+        .table-container {
+            width: 80%;
+            margin: 30px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+            transition: background-color 0.3s;
+        }
+
+        th {
+            background-color: #2980b9;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ecf0f1;
+            transition: background-color 0.3s;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .box {
+                width: 45%;
+            }
+
+            .form-container, .table-container {
+                width: 90%;
+            }
+
+            header h1 {
+                font-size: 2em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .box {
+                width: 100%;
+                margin: 10px 0;
+            }
+
+            header h1 {
+                font-size: 1.6em;
+            }
+
+            .btn {
+                font-size: 1em;
+                padding: 10px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Agricultural Employee Dashboard</h1>
+    <p>Manage Crop Data, Stock, and Tasks</p>
+</header>
+
+<div class="dashboard-container">
+    <!-- Dashboard Stats Boxes -->
+    <div class="box">
+        <h2>Pending Inspections</h2>
+        <p id="pendingInspections">3</p>
+        <button class="btn motion-btn" onclick="viewInspections()">View Inspections</button>
+    </div>
+
+    <div class="box">
+        <h2>Current Crop Stock</h2>
+        <p id="cropStock">2000 kg</p>
+        <button class="btn motion-btn" onclick="viewCropStock()">View Stock</button>
+    </div>
+
+    <div class="box">
+        <h2>Upcoming Tasks</h2>
+        <p id="upcomingTasks">5 Tasks</p>
+        <button class="btn motion-btn" onclick="viewTasks()">View Tasks</button>
+    </div>
+</div>
+
+<!-- Crop Management Form -->
+<div class="form-container">
+    <h2>Add/Update Crop Entry</h2>
+    <form id="cropForm">
+        <label for="cropName">Crop Name:</label>
+        <input type="text" id="cropName" required><br><br>
+
+        <label for="quantity">Quantity (kg):</label>
+        <input type="number" id="quantity" min="0" required><br><br>
+
+        <label for="storageLocation">Storage Location:</label>
+        <select id="storageLocation">
+            <option value="Farm Area A">Farm Area A</option>
+            <option value="Farm Area B">Farm Area B</option>
+            <option value="Farm Area C">Farm Area C</option>
+            <option value="Farm Area D">Farm Area D</option>
+        </select><br><br>
+
+        <input type="button" value="Add Crop" class="btn motion-btn" onclick="addCrop()">
+        <input type="button" value="Update Crop" class="btn motion-btn" id="updateBtn" onclick="updateCrop()" style="display:none;">
+    </form>
+</div>
+
+<!-- Crop Table -->
+<div class="table-container">
+    <h2>Crop Stock Records</h2>
+    <table id="cropStockTable">
+        <thead>
+            <tr>
+                <th>Crop Name</th>
+                <th>Quantity (kg)</th>
+                <th>Storage Location</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="cropTableBody"></tbody>
+    </table>
+</div>
+
+<!-- Analytics Chart Section -->
+<div class="chart-container">
+    <h2>Crop Performance Analytics</h2>
+    <canvas id="cropPerformanceChart"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Sample crop stock data
+    let cropData = [
+        { name: "Wheat", quantity: 1000, location: "Farm Area A" },
+        { name: "Rice", quantity: 800, location: "Farm Area B" },
+        { name: "Tomato", quantity: 600, location: "Farm Area C" }
+    ];
+
+    const cropTableBody = document.getElementById("cropTableBody");
+    let editingIndex = -1; // To keep track of the row being edited
+
+    // Display Crop Stock in Table
+    function displayCropStock() {
+        cropTableBody.innerHTML = "";
+        cropData.forEach((crop, index) => {
+            const row = cropTableBody.insertRow();
+            row.insertCell(0).textContent = crop.name;
+            row.insertCell(1).textContent = crop.quantity;
+            row.insertCell(2).textContent = crop.location;
+            const actionsCell = row.insertCell(3);
+            actionsCell.innerHTML = `<button class="btn motion-btn" onclick="editCrop(${index})">Edit</button> <button class="btn motion-btn" onclick="deleteCrop(${index})">Delete</button>`;
+        });
+        updateChart(); // Update chart when the table is updated
+    }
+
+    // Update the Chart with the crop data
+    function updateChart() {
+        const cropNames = cropData.map(crop => crop.name);
+        const cropQuantities = cropData.map(crop => crop.quantity);
+
+        const ctx = document.getElementById("cropPerformanceChart").getContext('2d');
+        if (window.chart) {
+            window.chart.destroy(); // Destroy previous chart before creating a new one
+        }
+
+        window.chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: cropNames,
+                datasets: [{
+                    label: 'Crop Stock (kg)',
+                    data: cropQuantities,
+                    backgroundColor: ['#ff5733', '#33FF57', '#3357FF'],
+                    borderColor: ['#e74c3c', '#2ecc71', '#3498db'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    }
+
+    // Add new crop
+    function addCrop() {
+        const cropName = document.getElementById("cropName").value;
+        const quantity = parseInt(document.getElementById("quantity").value);
+        const storageLocation = document.getElementById("storageLocation").value;
+
+        if (!cropName || isNaN(quantity) || quantity <= 0) {
+            alert("Please fill out all fields correctly.");
+            return;
+        }
+
+        cropData.push({ name: cropName, quantity: quantity, location: storageLocation });
+        displayCropStock();
+        document.getElementById("cropForm").reset(); // Reset form after submission
+    }
+
+    // Edit existing crop
+    function editCrop(index) {
+        const crop = cropData[index];
+        document.getElementById("cropName").value = crop.name;
+        document.getElementById("quantity").value = crop.quantity;
+        document.getElementById("storageLocation").value = crop.location;
+        document.getElementById("updateBtn").style.display = "inline-block";
+        editingIndex = index;
+    }
+
+    // Update crop
+    function updateCrop() {
+        const cropName = document.getElementById("cropName").value;
+        const quantity = parseInt(document.getElementById("quantity").value);
+        const storageLocation = document.getElementById("storageLocation").value;
+
+        if (!cropName || isNaN(quantity) || quantity <= 0 || editingIndex === -1) {
+            alert("Please fill out all fields correctly.");
+            return;
+        }
+
+        cropData[editingIndex] = { name: cropName, quantity: quantity, location: storageLocation };
+        displayCropStock();
+        document.getElementById("cropForm").reset();
+        document.getElementById("updateBtn").style.display = "none";
+        editingIndex = -1;
+    }
+
+    // Delete crop
+    function deleteCrop(index) {
+        cropData.splice(index, 1);
+        displayCropStock();
+    }
+
+    // Initialize table and chart
+    displayCropStock();
+</script>
+</body>
+</html>

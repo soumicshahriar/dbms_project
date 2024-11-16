@@ -3,16 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Farmer Crop Data Entry</title>
+    <title>Farmer</title>
     <style>
         /* General Page Styles */
         body {
             font-family: Arial, sans-serif;
             background: linear-gradient(45deg, #FFB6C1, #87CEEB); /* Vibrant gradient background */
+            background-size: 400% 400%;
+            animation: backgroundMotion 8s ease infinite; /* Added background color animation */
             color: #333;
             margin: 0;
             padding: 0;
-            transition: background-color 0.5s ease-in-out; /* Smooth background transition */
+            transition: background-color 0.5s ease-in-out;
+        }
+
+        @keyframes backgroundMotion {
+            0% { background: linear-gradient(45deg, #FFB6C1, #87CEEB); }
+            50% { background: linear-gradient(45deg, #87CEEB, #FFB6C1); }
+            100% { background: linear-gradient(45deg, #FFB6C1, #87CEEB); }
         }
 
         h1 {
@@ -56,6 +64,17 @@
             color: white;
         }
 
+        /* Motion color effect for rows */
+        tr {
+            animation: rowColorMotion 8s ease infinite;
+        }
+
+        @keyframes rowColorMotion {
+            0% { background-color: #f2f2f2; }
+            50% { background-color: #d3e8ff; } /* Light blue background */
+            100% { background-color: #f2f2f2; }
+        }
+
         tr:nth-child(even) {
             background-color: #f2f2f2;
         }
@@ -73,7 +92,15 @@
             border: 1px solid #ccc;
             border-radius: 4px;
             width: 100%;
-            transition: border-color 0.3s ease;
+            animation: inputBackgroundMotion 5s ease-in-out infinite; /* Background motion animation */
+        }
+
+        @keyframes inputBackgroundMotion {
+            0% { background-color: #FFB6C1; }
+            25% { background-color: #FFD700; } /* Yellow */
+            50% { background-color: #87CEEB; } /* Light blue */
+            75% { background-color: #32CD32; } /* Green */
+            100% { background-color: #FFB6C1; } /* Back to light pink */
         }
 
         input[type="text"]:focus,
@@ -126,7 +153,7 @@
 <body>
 
     <div class="form-container">
-        <h1>Farmer Crop Data Entry</h1>
+        <h1>Farmer</h1>
 
         <!-- Crop Data Entry Form -->
         <form id="farmerForm">
@@ -271,9 +298,9 @@
             // Add actions (Edit and Delete)
             const actionsCell = newRow.insertCell(7);
             actionsCell.classList.add('actions');
-            actionsCell.innerHTML = `
-                <button onclick="editCropData(this)">Edit</button>
-                <button onclick="deleteCropData(this)">Delete</button>
+            actionsCell.innerHTML = ` 
+                <button onclick="editCropData(this)">Edit</button> 
+                <button onclick="deleteCropData(this)">Delete</button> 
             `;
 
             // Update chart data
