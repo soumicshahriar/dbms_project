@@ -14,7 +14,7 @@
     <div class="form-container">
       <h2>Signup</h2>
       <div class="rope"></div>
-      <form id="signup-form">
+      <form method="post" action="register.php" id="signup-form">
         <label for="name">Name</label>
         <input type="text" id="name" name="name" required>
 
@@ -22,16 +22,21 @@
         <input type="email" id="email" name="email" required>
 
         <label for="phone">Phone Number</label>
-        <input type="tel" id="phone" name="phone" required>
+        <input type="phone" id="phone" name="phone" required>
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required>
 
         <label for="role">Employee Role</label>
         <select id="role" name="role" required>
-          <option value="Agricultural Officer">Agricultural Officer</option>
-          <option value="Farmer">Farmer</option>
-          <option value="Customer">Customer</option>
+        <option value="Agricultural Officer">Agricultural Officer</option>
+          <option value="FARMER">Farmer</option>
+          <option value="MARKET_MANAGER">MARKET_MANAGER</option>
+          <option value="WARHOUSE_MANAGER">WARHOUSE_MANAGER</option>
+          <option value="CUSTOMER">CUSTOMER</option>
         </select>
 
-        <button type="submit">Signup</button>
+        <button type="submit" name="signUp">Signup</button>
       </form>
     </div>
 
@@ -39,24 +44,23 @@
     <div class="form-container">
       <h2>Login</h2>
       <div class="rope"></div>
-      <form id="login-form">
+      <form method="post" action="register.php" id="login-form">
         <label for="email-login">Email</label>
         <input type="email" id="email-login" name="email" required>
-
-        <label for="phone">Phone Number</label>
-        <input type="tel" id="phone" name="phone" required>
 
         <label for="password-login">Password</label>
         <input type="password" id="password-login" name="password" required>
 
         <label for="role">Employee Role</label>
         <select id="role" name="role" required>
-          <option value="Agricultural Officer">Agricultural Officer</option>
-          <option value="Farmer">Farmer</option>
-          <option value="Customer">Customer</option>
+        <option value="Agricultural Officer">Agricultural Officer</option>
+          <option value="FARMER">Farmer</option>
+          <option value="MARKET_MANAGER">MARKET_MANAGER</option>
+          <option value="WARHOUSE_MANAGER">WARHOUSE_MANAGER</option>
+          <option value="CUSTOMER">CUSTOMER</option>
         </select>
 
-        <button type="submit">Login</button>
+        <button type="submit" name="signIn">Login</button>
       </form>
     </div>
   </div>
