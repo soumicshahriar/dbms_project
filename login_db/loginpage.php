@@ -29,7 +29,7 @@
 
         <label for="role">Employee Role</label>
         <select id="role" name="role" required>
-        <option value="Agricultural Officer">Agricultural Officer</option>
+          <option value="Agricultural Officer">Agricultural Officer</option>
           <option value="FARMER">Farmer</option>
           <option value="MARKET_MANAGER">MARKET_MANAGER</option>
           <option value="WARHOUSE_MANAGER">WARHOUSE_MANAGER</option>
@@ -45,6 +45,9 @@
       <h2>Login</h2>
       <div class="rope"></div>
       <form method="post" action="register.php" id="login-form">
+        <label for="name-login">Name</label>
+        <input type="text" id="name-login" name="name" required>
+
         <label for="email-login">Email</label>
         <input type="email" id="email-login" name="email" required>
 
@@ -53,7 +56,7 @@
 
         <label for="role">Employee Role</label>
         <select id="role" name="role" required>
-        <option value="Agricultural Officer">Agricultural Officer</option>
+          <option value="Agricultural Officer">Agricultural Officer</option>
           <option value="FARMER">Farmer</option>
           <option value="MARKET_MANAGER">MARKET_MANAGER</option>
           <option value="WARHOUSE_MANAGER">WARHOUSE_MANAGER</option>

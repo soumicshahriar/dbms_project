@@ -460,9 +460,6 @@ require "db_con.php";
                 <button type="submit" name="delete_product" class="btn delete-btn" value="<?=$product['id'];?>">Delete</button>
               </form>
             </td>
-            <!-- <td>
-              <button class="btn cart-btn">Add to Cart</button>
-            </td> -->
           </tr>
 
       <?php
@@ -475,81 +472,6 @@ require "db_con.php";
 
     </tbody>
   </table>
-
-  <!-- <script>
-  let productId = 1;
-  let editingRow = null;
-
-  document.getElementById('quantity').addEventListener('input', () => {
-   document.getElementById('productionCost').value = document.getElementById('quantity').value * 10;
-  });
-
-  function addProduct() {
-   const productName = document.getElementById('productName').value;
-   const category = document.getElementById('category').value;
-   const region = document.getElementById('region').value;
-   const quantity = document.getElementById('quantity').value;
-   const productionCost = document.getElementById('productionCost').value;
-   const productionDate = document.getElementById('productionDate').value;
-   const expirationDate = document.getElementById('expirationDate').value;
-
-   if (editingRow) {
-    // Update existing row
-    editingRow.cells[1].innerText = productName;
-    editingRow.cells[2].innerText = category;
-    editingRow.cells[3].innerText = region;
-    editingRow.cells[4].innerText = quantity;
-    editingRow.cells[5].innerText = productionCost;
-    editingRow.cells[6].innerText = productionDate;
-    editingRow.cells[7].innerText = expirationDate;
-    editingRow = null;
-   } else {
-    // Add new row
-    const table = document.getElementById('productTable').getElementsByTagName('tbody')[0];
-    const newRow = table.insertRow();
-    newRow.innerHTML = `
-                <td>${productId++}</td>
-                <td>${productName}</td>
-                <td>${category}</td>
-                <td>${region}</td>
-                <td>${quantity}</td>
-                <td>${productionCost}</td>
-                <td>${productionDate}</td>
-                <td>${expirationDate}</td>
-                
-            `;
-   }
-
-   document.getElementById('productForm').reset();
-  }
-
-  function editProduct(button) {
-   const row = button.parentElement.parentElement;
-   editingRow = row;
-   document.getElementById('productName').value = row.cells[1].innerText;
-   document.getElementById('category').value = row.cells[2].innerText;
-   document.getElementById('region').value = row.cells[3].innerText;
-   document.getElementById('quantity').value = row.cells[4].innerText;
-   document.getElementById('productionCost').value = row.cells[5].innerText;
-   document.getElementById('productionDate').value = row.cells[6].innerText;
-   document.getElementById('expirationDate').value = row.cells[7].innerText;
-  }
-
-  function deleteProduct(button) {
-   const row = button.parentElement.parentElement;
-   row.remove();
-   updateProductIds();
-  }
-
-  function updateProductIds() {
-   const table = document.getElementById('productTable').getElementsByTagName('tbody')[0];
-   let rows = table.getElementsByTagName('tr');
-   productId = 1; // Reset ID
-   for (let i = 0; i < rows.length; i++) {
-    rows[i].cells[0].innerText = productId++;
-   }
-  }
- </script> -->
 
   <!-- footer section -->
   <div>

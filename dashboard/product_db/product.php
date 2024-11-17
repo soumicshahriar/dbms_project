@@ -25,9 +25,12 @@ if (isset($_POST['update_product'])) {
  $category = mysqli_real_escape_string($con, $_POST["category"]);
  $region = mysqli_real_escape_string($con, $_POST["region"]);
  $quantity = mysqli_real_escape_string($con, $_POST["quantity"]);
- $productionCost = mysqli_real_escape_string($con, $_POST["productionCost"]);
+ $cost_per_unit = mysqli_real_escape_string($con, $_POST["productionCost"]);
  $productionDate = mysqli_real_escape_string($con, $_POST["productionDate"]);
  $expirationDate = mysqli_real_escape_string($con, $_POST["expirationDate"]);
+
+ // Calculate production cost
+ $productionCost = $cost_per_unit * $quantity;
 
  $query = "UPDATE producttable SET product_name='$productName',category='$category',region='$region',	quantity='$quantity',production_cost='$productionCost',	production_date='productionDate',expire_date='$expirationDate' WHERE id='$product_id'";
 
@@ -49,9 +52,12 @@ if (isset($_POST["add_product"])) {
  $category = mysqli_real_escape_string($con, $_POST["category"]);
  $region = mysqli_real_escape_string($con, $_POST["region"]);
  $quantity = mysqli_real_escape_string($con, $_POST["quantity"]);
- $productionCost = mysqli_real_escape_string($con, $_POST["productionCost"]);
+ $cost_per_unit = mysqli_real_escape_string($con, $_POST["productionCost"]);
  $productionDate = mysqli_real_escape_string($con, $_POST["productionDate"]);
  $expirationDate = mysqli_real_escape_string($con, $_POST["expirationDate"]);
+
+ // Calculate production cost
+ $productionCost = $cost_per_unit * $quantity;
 
  $query = "INSERT INTO producttable (product_name,category,region,	quantity,production_cost,	production_date,expire_date) VALUES ('$productName','$category','$region','$quantity','$productionCost','$productionDate','$expirationDate')";
 }

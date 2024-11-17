@@ -324,118 +324,6 @@ require "db_con.php";
 
  <!-- product info -->
 
- <h1 class="product-management">Update The Product</h1>
-
- <div class="form-container">
-
-  <?php include('message.php'); ?>
-
-  <div>
-   <h4 style="color: white;" class="product-management">Product Management Form</h4>
-  </div><br><br>
-
-  <?php
-  if (isset($_GET['id'])) {
-   $product_id = mysqli_real_escape_string($con, $_GET['id']);
-   $query = "SELECT * FROM producttable WHERE id='$product_id' ";
-   $query_run = mysqli_query($con, $query);
-   
-   if (mysqli_num_rows($query_run) > 0) {
-    $product = mysqli_fetch_array($query_run);
-    
-    ?>
-    <form method="POST" id="productForm" action="product.php">
-
-    
-     <input type="hidden" id="id" name="product_id" value="<?=$product['id'];?>" min="1"><br>
-
-     <label for="productName">Product Name:</label>
-     <select id="productName" name="productName" required>
-        <option value="Rice" <?= $product['product_name'] === 'Rice' ? 'selected' : '' ?>>Rice</option>
-        <option value="Wheat" <?= $product['product_name'] === 'Wheat' ? 'selected' : '' ?>>Wheat</option>
-        <option value="Apples" <?= $product['product_name'] === 'Apples' ? 'selected' : '' ?>>Apples</option>
-        <option value="Bananas" <?= $product['product_name'] === 'Bananas' ? 'selected' : '' ?>>Bananas</option>
-        <option value="Potatoes" <?= $product['product_name'] === 'Potatoes' ? 'selected' : '' ?>>Potatoes</option>
-        <option value="Carrots" <?= $product['product_name'] === 'Carrots' ? 'selected' : '' ?>>Carrots</option>
-        <option value="Milk" <?= $product['product_name'] === 'Milk' ? 'selected' : '' ?>>Milk</option>
-        <option value="Cheese" <?= $product['product_name'] === 'Cheese' ? 'selected' : '' ?>>Cheese</option>
-        <option value="Chicken" <?= $product['product_name'] === 'Chicken' ? 'selected' : '' ?>>Chicken</option>
-        <option value="Beef" <?= $product['product_name'] === 'Beef' ? 'selected' : '' ?>>Beef</option>
-        <option value="Salmon" <?= $product['product_name'] === 'Salmon' ? 'selected' : '' ?>>Salmon</option>
-        <option value="Shrimp" <?= $product['product_name'] === 'Shrimp' ? 'selected' : '' ?>>Shrimp</option>
-        <option value="Almonds" <?= $product['product_name'] === 'Almonds' ? 'selected' : '' ?>>Almonds</option>
-        <option value="Sunflower Seeds" <?= $product['product_name'] === 'Sunflower Seeds' ? 'selected' : '' ?>>Sunflower Seeds</option>
-        <option value="Basil" <?= $product['product_name'] === 'Basil' ? 'selected' : '' ?>>Basil</option>
-        <option value="Turmeric" <?= $product['product_name'] === 'Turmeric' ? 'selected' : '' ?>>Turmeric</option>
-        <option value="Orange Juice" <?= $product['product_name'] === 'Orange Juice' ? 'selected' : '' ?>>Orange Juice</option>
-        <option value="Coffee" <?= $product['product_name'] === 'Coffee' ? 'selected' : '' ?>>Coffee</option>
-        <option value="Olive Oil" <?= $product['product_name'] === 'Olive Oil' ? 'selected' : '' ?>>Olive Oil</option>
-        <option value="Coconut Oil" <?= $product['product_name'] === 'Coconut Oil' ? 'selected' : '' ?>>Coconut Oil</option>
-      </select><br>
-
-     <label for="category">Category:</label>
-     <select id="category" name="category" value="<?=$product['category'];?>" required>
-      <option value="Grains & Cereals" <?= $product['category'] === 'Grains & Cereals' ? 'selected' : '' ?>>Grains & Cereals</option>
-      <option value="Fruits" <?= $product['category'] === 'Fruits' ? 'selected' : '' ?>>Fruits</option>
-      <option value="Vegetables" <?= $product['category'] === 'Vegetables' ? 'selected' : '' ?>>Vegetables</option>
-      <option value="Dairy Products" <?= $product['category'] === 'Dairy Products' ? 'selected' : '' ?>>Dairy Products</option>
-      <option value="Meat & Poultry" <?= $product['category'] === 'Meat & Poultry' ? 'selected' : '' ?>> Meat & Poultry</option>
-      <option value="Seafood" <?= $product['category'] === 'Seafood' ? 'selected' : '' ?>> Seafood</option>
-      <option value=" Herbs & Spices" <?= $product['category'] === 'Herbs & Spices' ? 'selected' : '' ?>> Herbs & Spices</option>
-      <option value="Nuts & Seeds" <?= $product['category'] === 'Nuts & Seeds' ? 'selected' : '' ?>> Nuts & Seeds</option>
-      <option value=" Beverages" <?= $product['category'] === 'Beverages' ? 'selected' : '' ?>> Beverages</option>
-      <option value="Oils & Fats" <?= $product['category'] === 'Oils & Fats' ? 'selected' : '' ?>> Oils & Fats</option>
-     </select><br>
-
-     <label for="region">Region of Production</label>
-     <select id="region" name="region" value="<?=$product['region'];?>" required>
-      <option value="Dhaka" <?= $product['region'] === 'Dhaka' ? 'selected' : '' ?>>Dhaka</option>
-      <option value="Chittagong" <?= $product['region'] === 'Chittagong' ? 'selected' : '' ?>>Chittagong</option>
-      <option value="Rajshahi" <?= $product['region'] === 'Rajshahi' ? 'selected' : '' ?>>Rajshahi</option>
-      <option value="Khulna" <?= $product['region'] === 'Khulna' ? 'selected' : '' ?>>Khulna</option>
-      <option value="Barisal" <?= $product['region'] === 'Barisal' ? 'selected' : '' ?>>Barisal</option>
-      <option value="Sylhet" <?= $product['region'] === 'Sylhet' ? 'selected' : '' ?>>Sylhet</option>
-      <option value="Rangpur" <?= $product['region'] === 'Rangpur' ? 'selected' : '' ?>>Rangpur</option>
-      <option value="Mymensingh" <?= $product['region'] === 'Mymensingh' ? 'selected' : '' ?>>Mymensingh</option>
-      <option value="Comilla" <?= $product['region'] === 'Comilla' ? 'selected' : '' ?>>Comilla</option>
-      <option value="Gazipur" <?= $product['region'] === 'Gazipur' ? 'selected' : '' ?>>Gazipur</option>
-      <option value="Narail" <?= $product['region'] === 'Narail' ? 'selected' : '' ?>>Narail</option>
-      <option value="Bogra" <?= $product['region'] === 'Bogra' ? 'selected' : '' ?>>Bogra</option>
-      <option value="Jessore" <?= $product['region'] === 'Jessore' ? 'selected' : '' ?>>Jessore</option>
-      <option value="Pabna" <?= $product['region'] === 'Pabna' ? 'selected' : '' ?>>Pabna</option>
-      <option value="Dinajpur" <?= $product['region'] === 'Dinajpur' ? 'selected' : '' ?>>Dinajpur</option>
-      <option value="Faridpur" <?= $product['region'] === 'Faridpur' ? 'selected' : '' ?>>Faridpur</option>
-      <option value="Tangail" <?= $product['region'] === 'Tangail' ? 'selected' : '' ?>>Tangail</option>
-      <option value="Narayanganj" <?= $product['region'] === 'Narayanganj' ? 'selected' : '' ?>>Narayanganj</option>
-      <option value="Jamalpur" <?= $product['region'] === 'Jamalpur' ? 'selected' : '' ?>>Jamalpur</option>
-      <option value="Kushtia" <?= $product['region'] === 'Kushtia' ? 'selected' : '' ?>>Kushtia</option>
-     </select><br>
-
-     <label for="quantity">Quantity (kg):</label>
-     <input type="number" id="quantity" name="quantity" value="<?=$product['quantity'];?>" min="1"><br>
-
-     <label for="productionCost">Production Cost (per Kg):</label>
-     <input type="number" id="productionCost" name="productionCost"  value="10" required><br>
-
-     <label for="productionDate">Production Date:</label>
-     <input type="date" id="productionDate" name="productionDate" value="<?=$product['production_date'];?>" required><br>
-
-     <label for="expirationDate">Expiration Date:</label>
-     <input type="date" id="expirationDate" name="expirationDate" value="<?=$product['expire_date'];?>" required><br>
-
-     <button class="addbutton" type="submit" name="update_product">Update Product</button>
-    </form>
-    
-   <?php
-
-   } else {
-    echo "<h4>No Such Id Found</h4>";
-   }
-  }
-  // print_r($product);
-  ?>
- </div>
-
  <h2 class="product-management">Product List</h2>
  <table id="productTable">
   <thead>
@@ -444,13 +332,12 @@ require "db_con.php";
     <th>Product Name</th>
     <th>Category</th>
     <th>Region</th>
-    <th>Quantity</th>
+    <th>Available Quantity</th>
+    <th>Select Quantity</th>
     <th>Production Cost</th>
     <th>Production Date</th>
     <th>Expiration Date</th>
-    <th>Update</th>
-    <th>Delete</th>
-    <th>Ad To Cart</th>
+    <th>Add to Cart</th>
    </tr>
   </thead>
   <tbody>
@@ -460,39 +347,88 @@ require "db_con.php";
 
    if (mysqli_num_rows($query_run) > 0) {
     foreach ($query_run as $product) {
-     //echo 
+     $unitCost = 10;
+     $availableQty = $product['quantity']; // Fetch available quantity
    ?>
      <tr>
       <td><?= $product['id']; ?></td>
       <td><?= $product['product_name']; ?></td>
       <td><?= $product['category']; ?></td>
       <td><?= $product['region']; ?></td>
-      <td><?= $product['quantity']; ?></td>
-      <td><?= $product['production_cost']; ?></td>
+      <td><?= $availableQty; ?></td>
+      <td>
+       <select class="quantity-dropdown"
+        data-unit-cost="<?= $unitCost ?>"
+        data-cost-field="cost-<?= $product['id']; ?>"
+        data-available-quantity="<?= $availableQty ?>">
+        <?php for ($i = 1; $i <= $availableQty; $i++) { ?>
+         <option value="<?= $i ?>"><?= $i ?></option>
+        <?php } ?>
+       </select>
+      </td>
+      <td>
+       <span id="cost-<?= $product['id']; ?>"><?= $unitCost ?></span>
+      </td>
       <td><?= $product['production_date']; ?></td>
       <td><?= $product['expire_date']; ?></td>
-
       <td>
-       <a href="product-update.php?id=<?= $product['id']; ?>"><button class="btn update-btn">Update</button></a>
-      </td>
-      <td>
-       <button class="btn delete-btn">Delete</button>
-      </td>
-      <td>
-       <button class="btn cart-btn">Add to Cart</button>
+       <form method="POST" action="add_to_cart.php" onsubmit="return validateQuantity(this);">
+        <input type="hidden" name="product_id" value="<?= $product['id']; ?>">
+        <input type="hidden" name="product_name" value="<?= $product['product_name']; ?>">
+        <input type="hidden" name="category" value="<?= $product['category']; ?>">
+        <input type="hidden" name="region" value="<?= $product['region']; ?>">
+        <input type="hidden" name="quantity" value="1" id="quantity-<?= $product['id']; ?>">
+        <input type="hidden" name="production_cost" value="<?= $unitCost ?>" id="hidden-cost-<?= $product['id']; ?>">
+        <input type="hidden" name="available_quantity" value="<?= $availableQty ?>">
+        <input type="hidden" name="name" value="<?= $_SESSION['name']; ?>">
+        <input type="hidden" name="email" value="<?= $_SESSION['email']; ?>">
+        <button type="submit" class="btn cart-btn">Add to Cart</button>
+       </form>
       </td>
      </tr>
-
    <?php
-    };
+    }
    } else {
-    echo "<h5>No record Found</h5>";
+    echo "<h5>No product Found</h5>";
    }
-
    ?>
-
   </tbody>
  </table>
+
+ <script>
+  // Handle quantity changes
+  document.querySelectorAll('.quantity-dropdown').forEach(dropdown => {
+   dropdown.addEventListener('change', function() {
+    const unitCost = parseFloat(this.dataset.unitCost);
+    const selectedQuantity = parseInt(this.value);
+    const totalCost = unitCost * selectedQuantity;
+
+    const costFieldId = this.dataset.costField;
+    const costField = document.getElementById(costFieldId);
+
+    // Update the displayed cost
+    costField.textContent = totalCost.toFixed(2);
+
+    // Update hidden input fields in the form
+    const row = this.closest('tr');
+    row.querySelector('input[name="quantity"]').value = selectedQuantity;
+    row.querySelector('input[name="production_cost"]').value = totalCost.toFixed(2);
+   });
+  });
+
+  // Validate quantity before form submission
+  function validateQuantity(form) {
+   const availableQty = parseInt(form.querySelector('input[name="available_quantity"]').value);
+   const selectedQty = parseInt(form.querySelector('input[name="quantity"]').value);
+
+   if (selectedQty > availableQty) {
+    alert('Selected quantity exceeds available stock!');
+    return false;
+   }
+   return true;
+  }
+ </script>
+
 
 
  <!-- footer section -->
