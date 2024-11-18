@@ -45,8 +45,8 @@
       <h2>Login</h2>
       <div class="rope"></div>
       <form method="post" action="register.php" id="login-form">
-        <label for="name-login">Name</label>
-        <input type="text" id="name-login" name="name" required>
+        <!-- <label for="name-login">Name</label>
+        <input type="text" id="name-login" name="name" required> -->
 
         <label for="email-login">Email</label>
         <input type="email" id="email-login" name="email" required>

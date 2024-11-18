@@ -15,6 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
  $name = $_POST['name'];
  $email = $_POST['email'];
 
+
  // Insert the data into the cart table
  $query = "INSERT INTO cart (product_id, product_name, category, region, quantity, production_cost, production_date, expire_date, name, email) 
               VALUES ('$product_id', '$product_name', '$category', '$region', '$quantity', '$production_cost', '$production_date', '$expire_date', '$name', '$email')";

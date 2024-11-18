@@ -26,13 +26,13 @@ if (isset($_POST['signUp'])) {
 }
 
 if (isset($_POST['signIn'])) {
- $name = $_POST['name'];
+ // $name = $_POST['name'];
  $email = $_POST['email'];
  $password = $_POST['password'];
  $password = md5($password);
  $employee = $_POST['role'];
 
- $sql = "SELECT * FROM users WHERE name='$name' AND email='$email' AND password='$password' AND employee='$employee'";
+ $sql = "SELECT * FROM users WHERE  email='$email' AND password='$password' AND employee='$employee'";
  $result = $conn->query($sql);
 
  if ($result->num_rows > 0) {
@@ -43,6 +43,7 @@ if (isset($_POST['signIn'])) {
   $_SESSION['email'] = $row['email'];
   $_SESSION['password'] = $row['password'];
   $_SESSION['employee'] = $row['employee'];
+ 
 
   // Redirect based on the employee role
   if ($row['employee'] == 'MARKET_MANAGER') {
