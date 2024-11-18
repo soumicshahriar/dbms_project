@@ -6,6 +6,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login and Signup Page</title>
   <link rel="stylesheet" href="loginpage.css">
+  <script>
+    // Prevent the back navigation after login/logout
+    if (window.history && window.history.pushState) {
+      window.history.pushState(null, null, window.location.href);
+      window.history.back();
+      window.history.forward();
+    }
+
+    // Optional: Prevent back button press using the onpopstate event
+    window.onpopstate = function() {
+      window.history.go(1);
+    };
+  </script>
 </head>
 
 <body>
@@ -29,10 +42,12 @@
 
         <label for="role">Employee Role</label>
         <select id="role" name="role" required>
-          <option value="Agricultural Officer">Agricultural Officer</option>
-          <option value="FARMER">Farmer</option>
+          <option value="AGRICULTURE_OFFICER">AGRICULTURE_OFFICER</option>
+          <option value="FARMER">FARMAR</option>
           <option value="MARKET_MANAGER">MARKET_MANAGER</option>
           <option value="WARHOUSE_MANAGER">WARHOUSE_MANAGER</option>
+          <option value="FOODQUALITY_OFFICER">FOODQUALITY_OFFICER</option>
+          <option value="GOVERNMENT_OFFICER">GOVERNMENT_OFFICER</option>
           <option value="CUSTOMER">CUSTOMER</option>
         </select>
 
@@ -56,10 +71,12 @@
 
         <label for="role">Employee Role</label>
         <select id="role" name="role" required>
-          <option value="Agricultural Officer">Agricultural Officer</option>
-          <option value="FARMER">Farmer</option>
+          <option value="AGRICULTURE_OFFICER">AGRICULTURE_OFFICER</option>
+          <option value="FARMER">FARMER</option>
           <option value="MARKET_MANAGER">MARKET_MANAGER</option>
           <option value="WARHOUSE_MANAGER">WARHOUSE_MANAGER</option>
+          <option value="FOODQUALITY_OFFICER">FOODQUALITY_OFFICER</option>
+          <option value="GOVERNMENT_OFFICER">GOVERNMENT_OFFICER</option>
           <option value="CUSTOMER">CUSTOMER</option>
         </select>
 

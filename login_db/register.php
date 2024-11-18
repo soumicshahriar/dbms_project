@@ -47,12 +47,12 @@ if (isset($_POST['signIn'])) {
 
   // Redirect based on the employee role
   if ($row['employee'] == 'MARKET_MANAGER') {
-   header("Location: /dashboard/market_manager.php");
-  } elseif ($row['employee'] == 'Agricultural Officer') {
+   header("Location: /dashboard/market-manager_db/index.php");
+  } elseif ($row['employee'] == 'AGRICULTURE_OFFICER') {
    header("Location: /dashboard/agri_officer_dashboard.php");
-  } elseif ($row['employee'] == 's_foodqualityofficer') {
+  } elseif ($row['employee'] == 'FOODQUALITY_OFFICER') {
    header("Location: /dashboard/s_foodqualityofficer.php");
-  } elseif ($row['employee'] == 's_government_office') {
+  } elseif ($row['employee'] == 'GOVERNMENT_OFFICER') {
    header("Location: /dashboard/s_government_office_dashboard.php");
   } elseif ($row['employee'] == 'WARHOUSE_MANAGER') {
    header("Location: /dashboard/s_warhousemanager.php");

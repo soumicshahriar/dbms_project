@@ -340,6 +340,9 @@
   <h1 class="market-manager">Market Manager Dashboard</h1>
 
   <form id="productForm">
+    <label for="employeeId">Employee ID:</label>
+    <input type="text" id="employee" required>
+    
     <label for="productId">Product ID:</label>
     <input type="text" id="productId" required>
 
