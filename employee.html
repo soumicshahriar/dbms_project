@@ -267,7 +267,7 @@
         updateChart(); // Update chart when the table is updated
     }
 
-    // Update the Chart with the crop data
+    // Update the Pie Chart with the crop data
     function updateChart() {
         const cropNames = cropData.map(crop => crop.name);
         const cropQuantities = cropData.map(crop => crop.quantity);
@@ -278,7 +278,7 @@
         }
 
         window.chart = new Chart(ctx, {
-            type: 'bar',
+            type: 'pie', // Change the type to 'pie'
             data: {
                 labels: cropNames,
                 datasets: [{
@@ -291,9 +291,16 @@
             },
             options: {
                 responsive: true,
-                scales: {
-                    y: {
-                        beginAtZero: true
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(tooltipItem) {
+                                return tooltipItem.label + ': ' + tooltipItem.raw + ' kg';
+                            }
+                        }
                     }
                 }
             }
