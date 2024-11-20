@@ -285,37 +285,43 @@ require "db_con.php";
   <div>
     <div class="navbar-p">
       <nav class="navbar navbar-expand-lg">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#"><i class="fa-solid fa-wheat-awn"></i> AGRIVI</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
-            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/index.html">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/dashboard_navbaritems/s_team.html">Team</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Pricing</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Solutions
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="/dashboard_navbaritems/s_farmersolution.html">For Farmers</a></li>
-                  <li><a class="dropdown-item" href="/dashboard_navbaritems/s_fundersolution.html">For Fnders</a></li>
-                  <li><a class="dropdown-item" href="/dashboard_navbaritems/s_iotsolution.html">IOT & Precision Farming</a></li>
-                  <li><a class="dropdown-item" href="/dashboard_navbaritems/s_supplychainsolution.html">Supply Chain</a></li>
-                </ul>
-              </li>
-            </ul>
+        <div class="container-fluid d-flex justify-content-between">
+          <div>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+              aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="/index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/dashboard_navbaritems/s_team.html">Team</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Pricing</a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Solutions
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="/dashboard_navbaritems/s_farmersolution.html">For Farmers</a></li>
+                    <li><a class="dropdown-item" href="/dashboard_navbaritems/s_fundersolution.html">For Fnders</a></li>
+                    <li><a class="dropdown-item" href="/dashboard_navbaritems/s_iotsolution.html">IOT & Precision Farming</a></li>
+                    <li><a class="dropdown-item" href="/dashboard_navbaritems/s_supplychainsolution.html">Supply Chain</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
           </div>
+          <a href="./s_product.php" class="back-button"><BUtton>Back</BUtton></a>
+
         </div>
+
+
       </nav>
     </div>
   </div>
@@ -462,7 +468,7 @@ require "db_con.php";
         <th>Expiration Date</th>
         <th>Update</th>
         <th>Delete</th>
-        <th>Ad To Cart</th>
+
       </tr>
     </thead>
     <tbody>
@@ -492,9 +498,6 @@ require "db_con.php";
               <form action="product.php" method="POST">
                 <button type="submit" name="delete_product" class="btn delete-btn" value="<?= $product['id']; ?>">Delete</button>
               </form>
-            </td>
-            <td>
-              <button class="btn cart-btn">Add to Cart</button>
             </td>
           </tr>
 
