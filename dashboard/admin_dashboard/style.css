@@ -19,15 +19,21 @@ body {
 }
 
 header {
- background: #4CAF50;
+ background: linear-gradient(270deg, #5ed1d7, #02f2ff, #00ffe5, #0dffeb, #00f8db);
  color: white;
  text-align: center;
  padding: 1rem;
  width: 100%;
+ border: 1px solid gray;
+ border-block-color: white;
 }
 
 .sidebar {
- background: #f4f4f4;
+ background: linear-gradient(270deg, #5ed1d7, #02f2ff, #00ffe5, #0dffeb, #00f8db);
+ border: 5px solid white;
+ border-block-color: #5f6060;
+ border-radius: 10%;
+ box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
  width: 250px;
  padding: 1rem;
  overflow-y: auto;
@@ -47,14 +53,19 @@ header {
  text-decoration: none;
  color: #333;
  padding: 0.5rem;
+ border: 1px solid transparent;
  display: block;
  border-radius: 5px;
  transition: background 0.3s ease;
 }
 
 .sidebar ul li a:hover {
- background: #4CAF50;
+ background: gray;
+ border-radius: 25%;
+ border: 1px solid black;
  color: white;
+ text-align: center;
+ width: fit-content;
 }
 
 main {
@@ -134,6 +145,22 @@ h2 {
 
   /* Reduce font size for smaller screens */
  }
+
+ .add-btn {
+  background-color: gray;
+  color: white;
+  padding: 1%;
+  border-radius: 50%;
+ }
+
+ .add-btn:hover {
+  background-color: #4CAF50;
+  background-color: green;
+  padding: 1%;
+  border: 5px solid gray;
+  border-block-color: white;
+  border-radius: 50%;
+ }
 }
 
 /* For mobile screens and below (400px or less) */
@@ -156,5 +183,21 @@ h2 {
  td {
   padding: 8px;
   /* Adjust padding for smaller screens */
+ }
+
+ .add-btn {
+  background-color: gray;
+  color: white;
+  padding: 1%;
+  border-radius: 50%;
+ }
+
+ .add-btn:hover {
+  background-color: #4CAF50;
+  background-color: green;
+  padding: 1%;
+  border: 5px solid gray;
+  border-block-color: white;
+  border-radius: 50%;
  }
 }
