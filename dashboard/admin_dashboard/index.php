@@ -179,7 +179,8 @@ $result = $conn->query($sql);
             border: 5px solid transparent;
 
         }
-        .delete-btn a{
+
+        .delete-btn a {
             color: white;
             text-decoration: none;
         }
@@ -190,6 +191,7 @@ $result = $conn->query($sql);
             border-block-color: #03fbff;
             border-radius: 50%;
         }
+
         .add-btn {
             background-color: gray;
             color: white;
@@ -200,11 +202,13 @@ $result = $conn->query($sql);
 
         .add-btn:hover {
             background-color: green;
-            padding:1%;
+            padding: 1%;
             border: 5px solid gray;
             border-block-color: white;
             border-radius: 50%;
         }
+
+        
     </style>
     <script>
         function openUpdateForm(id, year, yield, acreage, cost) {

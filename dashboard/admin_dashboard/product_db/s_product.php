@@ -317,7 +317,7 @@ require "db_con.php";
               </ul>
             </div>
           </div>
-          <a href="/dashboard/admin_dashboard/index.php" class="back-button"><BUtton>Back</BUtton></a>
+          <a href="/dashboard/admin_dashboard/index2.php" class="back-button"><BUtton>Back</BUtton></a>
 
         </div>
 
