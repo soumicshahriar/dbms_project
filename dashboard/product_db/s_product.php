@@ -120,7 +120,7 @@ require "db_con.php";
       /* background: linear-gradient(270deg, #5ed1d7, #02f2ff, #00ffe5, #0dffeb, #00f8db); */
       border: 5px solid black;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      
+
       padding: 8px;
       text-align: center;
     }

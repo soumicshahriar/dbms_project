@@ -1,0 +1,39 @@
+body {
+ font-family: Arial, sans-serif;
+}
+
+table {
+ width: 100%;
+ border-collapse: collapse;
+}
+
+table,
+th,
+td {
+ border: 1px solid black;
+}
+
+th,
+td {
+ padding: 8px;
+ text-align: left;
+}
+
+form input,
+form textarea {
+ width: 100%;
+ padding: 8px;
+ margin-bottom: 10px;
+}
+
+button {
+ padding: 10px 15px;
+ background-color: #4CAF50;
+ color: white;
+ border: none;
+ cursor: pointer;
+}
+
+button:hover {
+ background-color: #45a049;
+}
