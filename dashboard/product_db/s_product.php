@@ -12,6 +12,7 @@ require "db_con.php";
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
   <link rel="stylesheet" href="/dashboard/s_government_office.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <title>Product Management Form</title>
   <style>
     * {
@@ -24,28 +25,38 @@ require "db_con.php";
     body {
       width: 90%;
       margin: auto;
-      background: linear-gradient(270deg, #5ed1d7, #02f2ff, #00ffe5, #0dffeb, #00f8db);
+      /* background: linear-gradient(270deg, #5ed1d7, #02f2ff, #00ffe5, #0dffeb, #00f8db); */
     }
 
     /* nav style */
+    .navbar {
+      /* background-color: #333; */
+      /* Dark background for the navbar */
+      /* padding: 10px 20px; */
+      /* Padding for spacing */
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      border-radius: 5%;
+      /* Box shadow: horizontal, vertical, blur radius, color */
+    }
+
     .navbar-p {
       color: #fff;
       font-size: 1em;
     }
 
     .container-fluid {
-      background: linear-gradient(270deg, #5ed1d7, #003ef8, #000000, #ebebef, #00f8db);
+      /* background: linear-gradient(270deg, #5ed1d7, #003ef8, #000000, #ebebef, #00f8db); */
       background-size: 400% 400%;
       color: #fff;
       padding: 1em;
-      border: 5px solid gray;
-      border-block-color: #03fbff;
+      /* border: 5px solid gray;
+      border-block-color: #03fbff; */
       border-radius: 10%;
       font-size: 1.5em;
     }
 
     .nav-item a {
-      color: white;
+      color: black;
       width: fit-content;
       padding: 1%;
       margin: 1%;
@@ -92,95 +103,6 @@ require "db_con.php";
     /*form*/
 
 
-    .form-container {
-      display: flex;
-      flex-direction: column;
-      text-align: center;
-      border-radius: 20%;
-      border: 5px solid gray;
-      border-block-color: #03fbff;
-      background: linear-gradient(270deg, #5ed1d7, #003ef8, #000000, #101011, #00f8db);
-      background-size: 400% 400%;
-      width: 70%;
-      padding: 1%;
-      margin: auto;
-    }
-
-    .form-container:hover {
-      transform: scale(1.02);
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
-      /* Slightly stronger shadow on hover */
-    }
-
-    #productForm select {
-      border: 5px solid gray;
-
-
-    }
-
-    #productForm select:hover {
-      border: 5px solid gray;
-      border-block-color: #03fbff;
-
-    }
-
-    label {
-      display: block;
-      margin-bottom: 5px;
-      color: white;
-      background: linear-gradient(to bottom, rgb(196, 201, 214), rgb(0, 0, 0));
-    }
-
-    input {
-      background: bisque;
-      color: black;
-      width: 100%;
-      padding: 8px;
-      border: 3px solid #000000;
-      border-radius: 3px;
-      margin-bottom: 5%;
-    }
-
-
-
-    input:hover {
-      background: linear-gradient(270deg, #02f2ff, #02f2ff, #02f2ff, #02f2ff, #02f2ff);
-      width: 100%;
-      margin-bottom: 5%;
-      padding: 8px;
-      color: black;
-      background-color: gray;
-      border: 5px solid #03fbff;
-      border-block-color: gray;
-      border-radius: 50%;
-      text-align: center;
-
-    }
-
-    #productForm select {
-      background: bisque;
-      color: black;
-      width: 100%;
-      margin-bottom: 5%;
-      padding: 8px;
-      border: 3px solid #000000;
-      border-radius: 3px;
-    }
-
-    #productForm select:hover {
-      background: linear-gradient(270deg, #02f2ff, #02f2ff, #02f2ff, #02f2ff, #02f2ff);
-      width: 100%;
-      margin-right: 5%;
-      padding: 8px;
-      color: black;
-      background-color: gray;
-      border: 5px solid #03fbff;
-      border-block-color: gray;
-      border-radius: 50%;
-      text-align: center;
-
-    }
-
     table {
       border: 5px solid gray;
       border-block-color: #03fbff;
@@ -189,13 +111,16 @@ require "db_con.php";
       border-collapse: collapse;
       margin-top: 20px;
       margin-bottom: 2%;
+      border-radius: 40%;
     }
 
     table,
     th,
     td {
-      background: linear-gradient(270deg, #5ed1d7, #02f2ff, #00ffe5, #0dffeb, #00f8db);
-      border: 1px solid white;
+      /* background: linear-gradient(270deg, #5ed1d7, #02f2ff, #00ffe5, #0dffeb, #00f8db); */
+      border: 5px solid black;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      
       padding: 8px;
       text-align: center;
     }
@@ -323,10 +248,50 @@ require "db_con.php";
 
 
   <!-- product info -->
+  <!-- Filter Section -->
+  <div class="container mt-5">
+    <h2>Filter Products</h2>
+    <form id="filterForm" method="GET">
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label for="regionFilter">Select Region:</label>
+          <select id="regionFilter" name="region" class="form-control">
+            <option value="">All Regions</option>
+            <?php
+            // Fetch unique regions from the database
+            $regionQuery = "SELECT DISTINCT region FROM producttable";
+            $regionResult = mysqli_query($con, $regionQuery);
+            while ($row = mysqli_fetch_assoc($regionResult)) {
+              echo "<option value='" . $row['region'] . "'>" . $row['region'] . "</option>";
+            }
+            ?>
+          </select>
+        </div>
+        <div class="col-md-6">
+          <label for="yearFilter">Select Year:</label>
+          <select id="yearFilter" name="year" class="form-control">
+            <option value="">All Years</option>
+            <?php
+            // Fetch unique years from the production date
+            $yearQuery = "SELECT DISTINCT YEAR(production_date) AS year FROM producttable";
+            $yearResult = mysqli_query($con, $yearQuery);
+            while ($row = mysqli_fetch_assoc($yearResult)) {
+              echo "<option value='" . $row['year'] . "'>" . $row['year'] . "</option>";
+            }
+            ?>
+          </select>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Apply Filters</button>
+    </form>
+  </div>
+
 
   <!-- product table start -->
   <h2 class="product-management">Product List</h2>
-  <table id="productTable">
+  <h2 class="mt-5 text-center">Filtered Product List</h2>
+  <a href="./add_productForm.php"><button class="button">ADD PRODUCT</button></a>
+  <table id="productTable" class="table table-striped table-bordered">
     <thead>
       <tr>
         <th>ID</th>
@@ -344,152 +309,114 @@ require "db_con.php";
     </thead>
     <tbody>
       <?php
-      $query = "SELECT * FROM producttable";
+      // Filtering logic
+      $region = isset($_GET['region']) ? $_GET['region'] : '';
+      $year = isset($_GET['year']) ? $_GET['year'] : '';
+
+      $query = "SELECT * FROM producttable WHERE 1";
+
+      if ($region) {
+        $query .= " AND region = '$region'";
+      }
+      if ($year) {
+        $query .= " AND YEAR(production_date) = '$year'";
+      }
+
       $query_run = mysqli_query($con, $query);
 
       if (mysqli_num_rows($query_run) > 0) {
         foreach ($query_run as $product) {
-          //echo 
-      ?>
-          <tr>
-            <td><?= $product['id']; ?></td>
-            <td><?= $product['product_name']; ?></td>
-            <td><?= $product['category']; ?></td>
-            <td><?= $product['region']; ?></td>
-            <td><?= $product['season']; ?></td>
-            <td><?= $product['quantity']; ?></td>
-            <td><?= $product['production_cost']; ?></td>
-            <td><?= $product['production_date']; ?></td>
-            <td><?= $product['expire_date']; ?></td>
-
-            <td>
-              <a href="product-update.php?id=<?= $product['id']; ?>"><button class="btn update-btn">Update</button></a>
-            </td>
-            <td>
-              <form action="product.php" method="POST">
-                <button type="submit" name="delete_product" class="btn delete-btn" value="<?= $product['id']; ?>">Delete</button>
-              </form>
-            </td>
-          </tr>
-
-      <?php
-        };
+          echo "<tr>
+                  <td>{$product['id']}</td>
+                  <td>{$product['product_name']}</td>
+                  <td>{$product['category']}</td>
+                  <td>{$product['region']}</td>
+                  <td>{$product['season']}</td>
+                  <td>{$product['quantity']}</td>
+                <td>" . number_format($product['production_cost'], 2) . "</td>
+                  <td>{$product['production_date']}</td>
+                  <td>{$product['expire_date']}</td>
+                   <td>
+                    <a href='update_product.php?id={$product['id']}' class='btn btn-warning btn-sm'>Update</a>
+                  </td>
+                   <td>
+                    <a href='delete_product.php?id={$product['id']}' onclick='return confirm(\"Are you sure you want to delete this product?\")' class='btn btn-danger btn-sm'>Delete</a>
+                  </td>
+                  
+                </tr>";
+        }
       } else {
-        echo "<h5>No record Found</h5>";
+        echo "<tr><td colspan='9'>No records found</td></tr>";
       }
-
       ?>
-
     </tbody>
   </table>
 
+  <!-- Chart Section -->
+  <div class="container mt-5">
+    <h2 class="text-center">Product Data Chart</h2>
+    <canvas id="productChart"></canvas>
+  </div>
+
+  <script>
+    // Prepare data for the chart
+    const chartLabels = [];
+    const chartData = [];
+
+    <?php
+    // Query for chart data
+    $chartQuery = "SELECT product_name, SUM(quantity) AS total_quantity FROM producttable WHERE 1";
+
+    if ($region) {
+      $chartQuery .= " AND region = '$region'";
+    }
+    if ($year) {
+      $chartQuery .= " AND YEAR(production_date) = '$year'";
+    }
+
+    $chartQuery .= " GROUP BY product_name";
+    $chartResult = mysqli_query($con, $chartQuery);
+
+    while ($row = mysqli_fetch_assoc($chartResult)) {
+      echo "chartLabels.push('{$row['product_name']}');";
+      echo "chartData.push({$row['total_quantity']});";
+    }
+    ?>
+
+    // Create the chart
+    const ctx = document.getElementById('productChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: chartLabels,
+        datasets: [{
+          label: 'Quantity',
+          data: chartData,
+          backgroundColor: 'rgba(54, 162, 235, 0.6)',
+          borderColor: 'rgba(54, 162, 235, 1)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top',
+          },
+        },
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  </script>
 
   <!-- form start -->
 
 
-  <div class="form-container">
-
-    <?php include('message.php'); ?>
-
-    <div>
-      <h4 style="color: white;" class="product-management">Product Management Form</h4>
-    </div><br><br>
-    <form method="POST" id="productForm" action="product.php">
-
-      <!-- <label for="id">Product ID</label>
-      <input type="number" id="id" name="id"><br> -->
-
-      <label for="productName">Product Name:</label>
-      <select id="productName" name="productName" required>
-        <option value="Rice">Rice</option>
-        <option value="Wheat">Wheat</option>
-        <option value="Apples">Apples</option>
-        <option value="Bananas">Bananas</option>
-        <option value="Potatoes">Potatoes</option>
-        <option value="Carrots">Carrots</option>
-        <option value="Milk">Milk</option>
-        <option value="Cheese">Cheese</option>
-        <option value="Chicken">Chicken</option>
-        <option value="Beef">Beef</option>
-        <option value="Salmon">Salmon</option>
-        <option value="Shrimp">Shrimp</option>
-        <option value="Almonds">Almonds</option>
-        <option value="Sunflower Seeds">Sunflower Seeds</option>
-        <option value="Basil">Basil</option>
-        <option value="Turmeric">Turmeric</option>
-        <option value="Orange Juice">Orange Juice</option>
-        <option value="Coffee">Coffee</option>
-        <option value="Olive Oil">Olive Oil</option>
-        <option value="Coconut Oil">Coconut Oil</option>
-      </select><br>
-
-      <label for="category">Category:</label>
-      <select id="category" name="category" required>
-        <option value="">Select</option>
-        <option value="Grains & Cereals">Grains & Cereals</option>
-        <option value="Fruits">Fruits</option>
-        <option value="Vegetables">Vegetables</option>
-        <option value="Dairy Products">Dairy Products</option>
-        <option value="Meat & Poultry"> Meat & Poultry</option>
-        <option value="Seafood"> Seafood</option>
-        <option value=" Herbs & Spices"> Herbs & Spices</option>
-        <option value="Nuts & Seeds"> Nuts & Seeds</option>
-        <option value=" Beverages"> Beverages</option>
-        <option value="Oils & Fats"> Oils & Fats</option>
-      </select><br>
-
-      <label for="region">Region of Production</label>
-      <select id="region" name="region" required>
-        <option value="Dhaka">Dhaka</option>
-        <option value="Chittagong">Chittagong</option>
-        <option value="Rajshahi">Rajshahi</option>
-        <option value="Khulna">Khulna</option>
-        <option value="Barisal">Barisal</option>
-        <option value="Sylhet">Sylhet</option>
-        <option value="Rangpur">Rangpur</option>
-        <option value="Mymensingh">Mymensingh</option>
-        <option value="Comilla">Comilla</option>
-        <option value="Gazipur">Gazipur</option>
-        <option value="Narail">Narail</option>
-        <option value="Bogra">Bogra</option>
-        <option value="Jessore">Jessore</option>
-        <option value="Pabna">Pabna</option>
-        <option value="Dinajpur">Dinajpur</option>
-        <option value="Faridpur">Faridpur</option>
-        <option value="Tangail">Tangail</option>
-        <option value="Narayanganj">Narayanganj</option>
-        <option value="Jamalpur">Jamalpur</option>
-        <option value="Kushtia">Kushtia</option>
-      </select><br>
-
-      <label for="season">Seasionality</label>
-      <select id="season" name="season" required>
-        <option value="Summer">Summer</option>
-        <option value="Monsoon">Monsoon</option>
-        <option value="Autumn">Autumn</option>
-        <option value="Late Autumn">Late Autumn</option>
-        <option value="Winter">Winter</option>
-        <option value="Spring">Spring</option>
-        <option value="All Year Round">All Year Round</option>
-
-      </select><br>
-
-      <label for="quantity">Quantity (kg):</label>
-      <input type="number" id="quantity" name="quantity" min="1" value="1"><br>
-
-      <label for="productionCost">Production Cost (per Kg):</label>
-      <input type="number" id="productionCost" name="productionCost" value="10" readonly><br>
-
-      <label for="productionDate">Production Date:</label>
-      <input type="date" id="productionDate" name="productionDate" required><br>
-
-      <label for="expirationDate">Expiration Date:</label>
-      <input type="date" id="expirationDate" name="expirationDate" required><br>
-
-      <button class="addbutton" type="submit" name="add_product">Add Product</button>
-    </form>
-  </div>
-
+  <!-- Form  -->
 
 
   <!-- footer section -->
