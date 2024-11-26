@@ -10,176 +10,197 @@
   <title>Agricultural Product Demand</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
-    /* Style the canvas elements (pie charts) */
-    canvas {
-      width: 40% !important;
-      /* Set width to 100% of the container */
-      height: 20% !important;
-      /* Set height to 300px */
-      margin-bottom: 30px;
-      /* Add some space between charts */
-    }
 
-    /* Style the charts container */
-    #chartsContainer {
-      margin-top: 5%;
-      margin-bottom: 5%;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      justify-content: space-around;
-      border-radius: 10%;
-      box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.5);
-      background-color: rgb(255, 255, 255);
-      border: 5px solid gray;
-      border-block-color: #03fbff;
+/* Canvas charts */
+/* Canvas charts */
+canvas {
+  width: 100% !important;
+  max-width: 400px; /* Restrict maximum size */
+  height: auto !important; /* Maintain aspect ratio */
+  margin: 20px auto; /* Center and add spacing */
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+  border-radius: 8px; /* Subtle rounded edges */
+}
+
+/* Charts container */
+#chartsContainer {
+  margin: 3% auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  justify-content: center;
+  border-radius: 15px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  background-color: #ffffff;
+  border: 3px solid #03fbff;
+}
+
+/* Search input and label */
+label,
+input {
+  display: inline-block;
+  border: 2px solid #03fbff;
+  margin: 10px;
+  padding: 10px 15px;
+  font-size: 14px;
+  border-radius: 8px;
+  text-align: center;
+  transition: background-color 0.3s ease, transform 0.2s;
+}
+
+input:hover {
+  background-color: #e6faff;
+  transform: translateY(-2px);
+  cursor: pointer;
+}
+
+/* Buttons */
+.btn {
+  padding: 10px 20px;
+  margin: 1%;
+  border: 2px solid #03fbff;
+  border-radius: 25px;
+  background-color: transparent;
+  color: #000;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #03fbff;
+  color: white;
+  transform: scale(1.1);
+  border-color: gray;
+}
+
+/* Table styling */
+table {
+  border: 2px solid #03fbff;
+  width: 90%;
+  margin: 20px auto;
+  border-collapse: collapse;
+  background-color: #fdfdfd;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+th,
+td {
+  padding: 12px 8px;
+  text-align: center;
+  font-size: 14px;
+  font-family: 'Arial', sans-serif;
+}
+
+th {
+  background: linear-gradient(90deg, #03fbff, #00c8d7);
+  color: white;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+td {
+  background-color: #f9f9f9;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Navbar */
+.container-fluid {
+  background: linear-gradient(90deg, #ffffff, #eaf7ff);
+  padding: 1.5em;
+  border: 2px solid #03fbff;
+  border-radius: 20px;
+  box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.1);
+}
+
+.nav-item a {
+  color: #000;
+  padding: 10px 20px;
+  margin: 5px;
+  border: 2px solid #03fbff;
+  border-radius: 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+.nav-item a:hover {
+  background: #03fbff;
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* Dropdown menu */
+.dropdown-menu {
+  background: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-menu a {
+  color: #000;
+  font-size: 14px;
+  padding: 10px 15px;
+  transition: background-color 0.3s ease;
+}
+
+.dropdown-menu a:hover {
+  background-color: #03fbff;
+  color: white;
+}
+
+/* Body styling */
+body {
+  width: 90%;
+  margin: auto;
+  background-color: #f5f5f5;
+  font-family: 'Arial', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  canvas {
+    width: 90% !important;
+    margin-bottom: 15px;
+  }
+
+  #chartsContainer {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .container-fluid {
+    padding: 1em;
+    font-size: 1.2em;
+  }
+
+  .btn, .nav-item a {
+    font-size: 14px;
+  }
+}
+
+/*---------------------------------------------------------------------------------------------------------------*/
 
 
-    }
-
-    /* Optional: Style the search input and button */
-    label,
-    input {
-      border: 5px solid gray;
-      border-block-color: #03fbff;
-      margin: 10px;
-      text-align: center;
-      font-size: 16px;
-    }
-
-    input:hover {
-      border: 5px solid gray;
-      border-block-color: #03fbff;
-      margin: 10px;
-      text-align: center;
-      font-size: 16px;
-      background-color: #03fbff;
-      z-index: 2;
-    }
-
-    .btn {
-      margin: 1%;
-      border: 5px solid #03fbff;
-      border-block-color: gray;
-      border-radius: 20%;
-      background-color: transparent;
-    }
-
-    .btn:hover {
-      margin: 1%;
-      border: 5px solid gray;
-      border-block-color: #03fbff;
-      border-radius: 25%;
-      background-color: slategray;
-
-    }
-
-    /* Optional: Style the table */
-    /*table style */
-
-    table {
-      border: 5px solid gray;
-      border-block-color: #03fbff;
-      width: 90%;
-      margin: auto;
-      border-collapse: collapse;
-      margin-top: 20px;
-    }
-
-    th,
-    td {
-      background: linear-gradient(270deg, #5ed1d7, #02f2ff, #00ffe5, #0dffeb, #00f8db);
-      border: 1px solid #ddd;
-      padding: 8px;
-      text-align: center;
-    }
-
-    th {
-      background-color: #f2f2f2;
-    }
-
-    /*navbar */
-
-    /* nav style */
-    .navbar-p {
-      color: #fff;
-      font-size: 1em;
-    }
-
-    .container-fluid {
-      background: linear-gradient(270deg, #5ed1d7, #003ef8, #000000, #ebebef, #00f8db);
-      background-size: 400% 400%;
-      color: #fff;
-      padding: 1em;
-      border: 5px solid gray;
-      border-block-color: #03fbff;
-      border-radius: 10%;
-      font-size: 1.5em;
-    }
-
-    .nav-item a {
-      color: white;
-      width: fit-content;
-      padding: 1%;
-      margin: 1%;
-      border: 5px solid #03fbff;
-      border-block-color: gray;
-      border-radius: 5%;
-    }
-
-    .nav-item a:hover {
-      background: linear-gradient(270deg, #02f2ff, #02f2ff, #02f2ff, #02f2ff, #02f2ff);
-      color: white;
-      width: fit-content;
-      padding: 1%;
-      border: 5px solid #03fbff;
-      border-block-color: gray;
-      border-radius: 50%;
-    }
-
-    .btn-item {
-      color: rgb(0, 0, 0);
-      width: fit-content;
-      border: 5px solid #03fbff;
-      border-block-color: gray;
-      border-radius: 5%;
-    }
-
-    .btn-item :hover {
-      background: linear-gradient(270deg, #02f2ff, #02f2ff, #02f2ff, #02f2ff, #02f2ff);
-      color: rgb(0, 0, 0);
-      width: fit-content;
-      border: 5px solid #03fbff;
-      border-block-color: gray;
-      border-radius: 50%;
-    }
-
-    .dropdown-menu {
-      background: linear-gradient(270deg, #02f2ff, #02f2ff, #02f2ff, #02f2ff, #02f2ff);
-      color: #fff;
-      padding: 1em;
-      border: 1px solid black;
-      border-radius: 5%;
-
-    }
-
-    .dropdown-menu:hover {
-      color: linear-gradient(to bottom, rgb(234, 235, 243), rgb(0, 0, 0));
-      width: fit-content;
-      padding: 1%;
-      border: 1px solid black;
-      border-radius: 5%;
-    }
 
 
 
-    /*navbar end */
 
-    body {
-      width: 90%;
-      margin: auto;
-      background: linear-gradient(270deg, #5ed1d7, #02f2ff, #00ffe5, #0dffeb, #00f8db);
-    }
+
+
+
+
+
+
+
+
+
+
   </style>
 </head>
 
