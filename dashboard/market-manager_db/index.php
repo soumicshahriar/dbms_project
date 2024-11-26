@@ -52,7 +52,7 @@
                     </li>
                   </ul>
                 <li class="nav-item">
-                  <a class="nav-link" href="/dashboard/product_db/s_product.php">ADD</a>
+                  <a class="nav-link" href="/dashboard/product_db/s_product.php">PRODUCT</a>
                 </li>
                 </li>
               </ul>
