@@ -99,7 +99,7 @@ $result_purchases = $conn->query("SELECT d.*, p.product_name
 
 <!DOCTYPE html>
 <html lang="en">
-
+<link rel="stylesheet" href="styles.css">
 <head>
  <meta charset="UTF-8">
  <title>Consumer Dashboard</title>
@@ -128,6 +128,7 @@ $result_purchases = $conn->query("SELECT d.*, p.product_name
     <th>Price</th>
     <th>Available Quantity</th>
     <th>Description</th>
+    <th>Select Quantity</th>
     <th>Actions</th>
    </tr>
   </thead>
@@ -143,10 +144,12 @@ $result_purchases = $conn->query("SELECT d.*, p.product_name
       <form method="POST" action="">
        <input type="hidden" name="product_id" value="<?php echo $row['id']; ?>">
        <input type="hidden" name="purchase_price" value="<?php echo $row['production_cost']; ?>">
-       <input type="number" name="purchase_quantity" min="1" max="<?php echo $row['quantity']; ?>" required>
-       <button type="submit" name="add_to_cart">Add to Cart</button>
-      </form>
+       <input  type="number" name="purchase_quantity" min="1" max="<?php echo $row['quantity']; ?>" required>
+       
+      
      </td>
+     <td><button type="submit" name="add_to_cart">Add to Cart</button></td>
+     </form>
     </tr>
    <?php } ?>
   </tbody>
@@ -175,7 +178,7 @@ $result_purchases = $conn->query("SELECT d.*, p.product_name
 
  <!-- Display Filtered Purchase Data -->
  <h2>Your Purchases</h2>
- <table border="1">
+ <table style="margin-bottom: 5%;" border="1">
   <thead>
    <tr>
     <th>Product Name</th>
@@ -183,7 +186,7 @@ $result_purchases = $conn->query("SELECT d.*, p.product_name
     <th>Purchase Price</th>
     <th>Total Price</th>
     <th>Purchase Date</th>
-
+    
     <th>Actions</th>
    </tr>
   </thead>

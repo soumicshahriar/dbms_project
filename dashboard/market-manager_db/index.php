@@ -9,178 +9,10 @@
   <link rel="stylesheet" href="/dashboard/market-manager_db/footer.css">
   <title>Agricultural Product Demand</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <style>
-    /* Style the canvas elements (pie charts) */
-    canvas {
-      width: 40% !important;
-      /* Set width to 100% of the container */
-      height: 20% !important;
-      /* Set height to 300px */
-      margin-bottom: 30px;
-      /* Add some space between charts */
-    }
-
-    /* Style the charts container */
-    #chartsContainer {
-      margin-top: 5%;
-      margin-bottom: 5%;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      justify-content: space-around;
-      border-radius: 10%;
-      box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.5);
-      background-color: rgb(255, 255, 255);
-      border: 5px solid gray;
-      border-block-color: #03fbff;
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="/navbar.css">
 
 
-    }
-
-    /* Optional: Style the search input and button */
-    label,
-    input {
-      border: 5px solid gray;
-      border-block-color: #03fbff;
-      margin: 10px;
-      text-align: center;
-      font-size: 16px;
-    }
-
-    input:hover {
-      border: 5px solid gray;
-      border-block-color: #03fbff;
-      margin: 10px;
-      text-align: center;
-      font-size: 16px;
-      background-color: #03fbff;
-      z-index: 2;
-    }
-
-    .btn {
-      margin: 1%;
-      border: 5px solid #03fbff;
-      border-block-color: gray;
-      border-radius: 20%;
-      background-color: transparent;
-    }
-
-    .btn:hover {
-      margin: 1%;
-      border: 5px solid gray;
-      border-block-color: #03fbff;
-      border-radius: 25%;
-      background-color: slategray;
-
-    }
-
-    /* Optional: Style the table */
-    /*table style */
-
-    table {
-      border: 5px solid gray;
-      border-block-color: #03fbff;
-      width: 90%;
-      margin: auto;
-      border-collapse: collapse;
-      margin-top: 20px;
-    }
-
-    th,
-    td {
-      background: linear-gradient(270deg, #5ed1d7, #02f2ff, #00ffe5, #0dffeb, #00f8db);
-      border: 1px solid #ddd;
-      padding: 8px;
-      text-align: center;
-    }
-
-    th {
-      background-color: #f2f2f2;
-    }
-
-    /*navbar */
-
-    /* nav style */
-    .navbar-p {
-      color: #fff;
-      font-size: 1em;
-    }
-
-    .container-fluid {
-      background: linear-gradient(270deg, #5ed1d7, #003ef8, #000000, #ebebef, #00f8db);
-      background-size: 400% 400%;
-      color: #fff;
-      padding: 1em;
-      border: 5px solid gray;
-      border-block-color: #03fbff;
-      border-radius: 10%;
-      font-size: 1.5em;
-    }
-
-    .nav-item a {
-      color: white;
-      width: fit-content;
-      padding: 1%;
-      margin: 1%;
-      border: 5px solid #03fbff;
-      border-block-color: gray;
-      border-radius: 5%;
-    }
-
-    .nav-item a:hover {
-      background: linear-gradient(270deg, #02f2ff, #02f2ff, #02f2ff, #02f2ff, #02f2ff);
-      color: white;
-      width: fit-content;
-      padding: 1%;
-      border: 5px solid #03fbff;
-      border-block-color: gray;
-      border-radius: 50%;
-    }
-
-    .btn-item {
-      color: rgb(0, 0, 0);
-      width: fit-content;
-      border: 5px solid #03fbff;
-      border-block-color: gray;
-      border-radius: 5%;
-    }
-
-    .btn-item :hover {
-      background: linear-gradient(270deg, #02f2ff, #02f2ff, #02f2ff, #02f2ff, #02f2ff);
-      color: rgb(0, 0, 0);
-      width: fit-content;
-      border: 5px solid #03fbff;
-      border-block-color: gray;
-      border-radius: 50%;
-    }
-
-    .dropdown-menu {
-      background: linear-gradient(270deg, #02f2ff, #02f2ff, #02f2ff, #02f2ff, #02f2ff);
-      color: #fff;
-      padding: 1em;
-      border: 1px solid black;
-      border-radius: 5%;
-
-    }
-
-    .dropdown-menu:hover {
-      color: linear-gradient(to bottom, rgb(234, 235, 243), rgb(0, 0, 0));
-      width: fit-content;
-      padding: 1%;
-      border: 1px solid black;
-      border-radius: 5%;
-    }
-
-
-
-    /*navbar end */
-
-    body {
-      width: 90%;
-      margin: auto;
-      background: linear-gradient(270deg, #5ed1d7, #02f2ff, #00ffe5, #0dffeb, #00f8db);
-    }
-  </style>
 </head>
 
 <body>
@@ -220,7 +52,7 @@
                     </li>
                   </ul>
                 <li class="nav-item">
-                  <a class="nav-link" href="/dashboard/product_db/s_product.php">Product</a>
+                  <a class="nav-link" href="/dashboard/product_db/s_product.php">ADD</a>
                 </li>
                 </li>
               </ul>
@@ -229,7 +61,7 @@
 
           </div>
 
-          <button class="btn-item"><a class="nav-link" href="./logout.php">LOG OUT</a></button>
+          <button class="btn btn-info"><a class="nav-link" href="./logout.php">LOG OUT</a></button>
 
         </div>
 
@@ -267,7 +99,7 @@
   <input type="text" id="region" placeholder="Enter region name">
   <button onclick="fetchData()">Search</button> -->
   </div>
-
+  <!-- <a href="/dashboard/product_db/s_product.php"><button style="margin-top: 10px;" class="btn">ADD PRODUCT</button></a> -->
   <table border="1" id="productTable">
     <thead>
       <tr>

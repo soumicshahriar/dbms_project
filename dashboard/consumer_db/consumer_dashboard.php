@@ -1,5 +1,5 @@
 <?php
-include('db.php');
+include('db_con.php');
 
 // Handle add to cart
 if (isset($_POST['add_to_cart'])) {
@@ -15,14 +15,14 @@ if (isset($_POST['add_to_cart'])) {
 
  // Add purchase data to demandcart, including total price
  $purchase_date = date('Y-m-d'); // Current date
- $conn->query("INSERT INTO demandcart (product_id, customer_id, purchase_quantity, purchase_price, total_price, purchase_date) 
+ $con->query("INSERT INTO demandcart (product_id, customer_id, purchase_quantity, purchase_price, total_price, purchase_date) 
                VALUES ($product_id, $customer_id, $purchase_quantity, $purchase_price, $total_price, '$purchase_date')");
 
  // Update product quantity in the products table
- $conn->query("UPDATE producttable SET quantity = quantity - $purchase_quantity WHERE id = $product_id");
+ $con->query("UPDATE producttable SET quantity = quantity - $purchase_quantity WHERE id = $product_id");
 
  // Redirect back to the same page to refresh
- header("Location: consumer_dashboard2.php");
+ header("Location: consumer_dashboard.php");
  exit;
 }
 
@@ -30,7 +30,7 @@ if (isset($_POST['add_to_cart'])) {
 if (isset($_GET['delete_id'])) {
  $delete_id = $_GET['delete_id'];
  // Fetch the purchase quantity and product_id for the item to delete
- $result = $conn->query("SELECT product_id, purchase_quantity FROM demandcart WHERE id = $delete_id");
+ $result = $con->query("SELECT product_id, purchase_quantity FROM demandcart WHERE id = $delete_id");
  $item = $result->fetch_assoc();
 
  if ($item) {
@@ -38,62 +38,62 @@ if (isset($_GET['delete_id'])) {
   $purchase_quantity = $item['purchase_quantity'];
 
   // Delete the item from the demandcart
-  $conn->query("DELETE FROM demandcart WHERE id = $delete_id");
+  $con->query("DELETE FROM demandcart WHERE id = $delete_id");
 
   // Restore the product quantity in the products table
-  $conn->query("UPDATE producttable SET quantity = quantity + $purchase_quantity WHERE id = $product_id");
+  $con->query("UPDATE producttable SET quantity = quantity + $purchase_quantity WHERE id = $product_id");
 
   // Redirect back to the same page after deletion
-  header("Location: consumer_dashboard2.php");
+  header("Location: consumer_dashboard.php");
   exit;
  }
 }
 
 // Fetch products from database for the dropdown list
-$products_result = $conn->query("SELECT * FROM producttable");
+$products_result = $con->query("SELECT * FROM producttable");
 
 // Handle filtering of purchase data by year, month, and product name
-$filter_query = "";
-$total_quantity = 0;
-$product_name_filter = "";
+// $filter_query = "";
+// $total_quantity = 0;
+// $product_name_filter = "";
 
-if (isset($_GET['filter'])) {
- $month_start = $_GET['month_start'] ?? null;
- $month_end = $_GET['month_end'] ?? null;
- $year_start = $_GET['year_start'] ?? null;
- $year_end = $_GET['year_end'] ?? null;
- $product_name_filter = $_GET['product_name'] ?? '';
+// if (isset($_GET['filter'])) {
+//  $month_start = $_GET['month_start'] ?? null;
+//  $month_end = $_GET['month_end'] ?? null;
+//  $year_start = $_GET['year_start'] ?? null;
+//  $year_end = $_GET['year_end'] ?? null;
+//  $product_name_filter = $_GET['product_name'] ?? '';
 
- // If all filter fields are empty, display all purchases
- if (empty($month_start) && empty($month_end) && empty($year_start) && empty($year_end) && empty($product_name_filter)) {
-  $filter_query = "";
- } else {
-  // Build the filtering query
-  if ($month_start && $month_end) {
-   $filter_query .= " AND MONTH(purchase_date) BETWEEN $month_start AND $month_end";
-  }
-  if ($year_start && $year_end) {
-   $filter_query .= " AND YEAR(purchase_date) BETWEEN $year_start AND $year_end";
-  }
-  if ($product_name_filter) {
-   $filter_query .= " AND p.product_name LIKE '%$product_name_filter%'";
-  }
- }
+//  // If all filter fields are empty, display all purchases
+//  if (empty($month_start) && empty($month_end) && empty($year_start) && empty($year_end) && empty($product_name_filter)) {
+//   $filter_query = "";
+//  } else {
+//   // Build the filtering query
+//   if ($month_start && $month_end) {
+//    $filter_query .= " AND MONTH(purchase_date) BETWEEN $month_start AND $month_end";
+//   }
+//   if ($year_start && $year_end) {
+//    $filter_query .= " AND YEAR(purchase_date) BETWEEN $year_start AND $year_end";
+//   }
+//   if ($product_name_filter) {
+//    $filter_query .= " AND p.product_name LIKE '%$product_name_filter%'";
+//   }
+//  }
 
- // Calculate the total purchase quantity based on the filter
- $result_filtered = $conn->query("SELECT SUM(purchase_quantity) AS total_quantity 
-                                     FROM demandcart d
-                                     JOIN producttable p ON d.product_id = p.id 
-                                     WHERE d.customer_id = 1 $filter_query");
- $total_quantity_row = $result_filtered->fetch_assoc();
- $total_quantity = $total_quantity_row['total_quantity'] ?? 0;
-}
+//  // Calculate the total purchase quantity based on the filter
+//  $result_filtered = $con->query("SELECT SUM(purchase_quantity) AS total_quantity 
+//                                      FROM demandcart d
+//                                      JOIN producttable p ON d.product_id = p.id 
+//                                      WHERE d.customer_id = 1 $filter_query");
+//  $total_quantity_row = $result_filtered->fetch_assoc();
+//  $total_quantity = $total_quantity_row['total_quantity'] ?? 0;
+// }
 
 // Fetch all purchases for the customer
-$result_purchases = $conn->query("SELECT d.*, p.product_name 
+$result_purchases = $con->query("SELECT d.*, p.product_name 
                                   FROM demandcart d 
                                   JOIN producttable p ON d.product_id = p.id 
-                                  WHERE d.customer_id = 1 $filter_query");
+                                  WHERE d.customer_id = 1");
 
 ?>
 
@@ -103,16 +103,8 @@ $result_purchases = $conn->query("SELECT d.*, p.product_name
 <head>
  <meta charset="UTF-8">
  <title>Consumer Dashboard</title>
- <!-- <script>
-  // JavaScript function to clear the filter input fields after the form is submitted
-  function clearFilterFields() {
-   document.getElementById('month_start').value = '';
-   document.getElementById('month_end').value = '';
-   document.getElementById('year_start').value = '';
-   document.getElementById('year_end').value = '';
-   document.getElementById('product_name').value = '';
-  }
- </script> -->
+ <link rel="stylesheet" href="styles.css">
+
 </head>
 
 <body>
@@ -153,7 +145,7 @@ $result_purchases = $conn->query("SELECT d.*, p.product_name
  </table>
 
  <!-- Filter Purchases by Month, Year, and Product Name -->
- <h2>Filter Purchases</h2>
+ <!-- <h2>Filter Purchases</h2>
  <form method="GET" action="" onsubmit="clearFilterFields()">
 
   <label>Product Name:</label>
@@ -171,7 +163,7 @@ $result_purchases = $conn->query("SELECT d.*, p.product_name
   <button type="submit" name="filter">Filter</button>
  </form>
 
- <h3>Total Quantity Purchased: <?php echo $total_quantity; ?></h3>
+ <h3>Total Quantity Purchased: <?php echo $total_quantity; ?></h3> -->
 
  <!-- Display Filtered Purchase Data -->
  <h2>Your Purchases</h2>
@@ -197,7 +189,7 @@ $result_purchases = $conn->query("SELECT d.*, p.product_name
      <td><?php echo $purchase['purchase_date']; ?></td>
      <td>
       <!-- Delete Button -->
-      <a href="consumer_dashboard2.php?delete_id=<?php echo $purchase['id']; ?>" onclick="return confirm('Are you sure you want to delete this item?');">
+      <a href="consumer_dashboard.php?delete_id=<?php echo $purchase['id']; ?>" onclick="return confirm('Are you sure you want to delete this item?');">
        <button>Delete</button>
       </a>
      </td>
@@ -210,4 +202,4 @@ $result_purchases = $conn->query("SELECT d.*, p.product_name
 
 </html>
 
-<?php $conn->close(); ?>
+<?php $con->close(); ?>

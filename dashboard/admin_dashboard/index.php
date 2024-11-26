@@ -353,6 +353,7 @@ $seedResult = $conn->query($seedSql);
             document.getElementById('historicalDataTable').classList.add('hidden');
 
             document.getElementById('select-consumer-demand').classList.add('hidden');
+            document.getElementById('price-elasticity-button').classList.add('hidden');
             document.getElementById('select-region').classList.add('hidden');
 
             document.getElementById('cropsTable').classList.add('hidden');
@@ -381,6 +382,7 @@ $seedResult = $conn->query($seedSql);
                 document.getElementById('chartsContainer').classList.remove('hidden');
                 document.getElementById('chartsContainer').style.display = 'flex';
                 document.getElementById('select-consumer-demand').classList.remove('hidden');
+                document.getElementById('price-elasticity-button').classList.remove('hidden');
                 document.getElementById('select-region').classList.remove('hidden');
 
             } else if (tableName === 'supplylevel') {
@@ -606,9 +608,9 @@ $seedResult = $conn->query($seedSql);
                     </div>
                 </div>
 
+                <!-- Consumer Demand Data -->
                 <h1 id="select-consumer-demand" class="hidden" style="text-align: center;"> CONSUMER DEMAND DATA</h1>
-
-
+                <a href="./consumerdemand/elasticity.php"><button id="price-elasticity-button" style="text-align: center;" class="btn btn-primary hidden">Check Price Elasticity</button></a>
                 <div id="select-region" class="hidden" style="text-align: center;">
                     <select class="btn" id="region" onchange="fetchData()">
                         <option value="">Select Region</option>
@@ -633,9 +635,6 @@ $seedResult = $conn->query($seedSql);
                         <option value="Jamalpur">Jamalpur</option>
                         <option value="Kushtia">Kushtia</option>
                     </select>
-                    <!-- <label for="region">Search by Region:</label>
-<input type="text" id="region" placeholder="Enter region name">
-<button onclick="fetchData()">Search</button> -->
                 </div>
 
                 <table border="1" id="productTable" class="hidden">
