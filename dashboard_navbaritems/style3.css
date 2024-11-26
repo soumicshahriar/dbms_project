@@ -10,3 +10,10 @@
  
  
 }
+.image-crop {
+    width: 960px; /* Desired width */
+    height: 960px; /* Desired height */
+    object-fit: cover; /* Ensures the image covers the area */
+    border-radius: 50%; /* Optional: make it circular */
+  }
+  
