@@ -9,199 +9,10 @@
   <link rel="stylesheet" href="/dashboard/market-manager_db/footer.css">
   <title>Agricultural Product Demand</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <style>
-
-/* Canvas charts */
-/* Canvas charts */
-canvas {
-  width: 100% !important;
-  max-width: 400px; /* Restrict maximum size */
-  height: auto !important; /* Maintain aspect ratio */
-  margin: 20px auto; /* Center and add spacing */
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
-  border-radius: 8px; /* Subtle rounded edges */
-}
-
-/* Charts container */
-#chartsContainer {
-  margin: 3% auto;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 25px;
-  justify-content: center;
-  border-radius: 15px;
-  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-  background-color: #ffffff;
-  border: 3px solid #03fbff;
-}
-
-/* Search input and label */
-label,
-input {
-  display: inline-block;
-  border: 2px solid #03fbff;
-  margin: 10px;
-  padding: 10px 15px;
-  font-size: 14px;
-  border-radius: 8px;
-  text-align: center;
-  transition: background-color 0.3s ease, transform 0.2s;
-}
-
-input:hover {
-  background-color: #e6faff;
-  transform: translateY(-2px);
-  cursor: pointer;
-}
-
-/* Buttons */
-.btn {
-  padding: 10px 20px;
-  margin: 1%;
-  border: 2px solid #03fbff;
-  border-radius: 25px;
-  background-color: transparent;
-  color: #000;
-  font-size: 14px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.btn:hover {
-  background-color: #03fbff;
-  color: white;
-  transform: scale(1.1);
-  border-color: gray;
-}
-
-/* Table styling */
-table {
-  border: 2px solid #03fbff;
-  width: 90%;
-  margin: 20px auto;
-  border-collapse: collapse;
-  background-color: #fdfdfd;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-}
-
-th,
-td {
-  padding: 12px 8px;
-  text-align: center;
-  font-size: 14px;
-  font-family: 'Arial', sans-serif;
-}
-
-th {
-  background: linear-gradient(90deg, #03fbff, #00c8d7);
-  color: white;
-  text-transform: uppercase;
-  font-weight: bold;
-}
-
-td {
-  background-color: #f9f9f9;
-  border-bottom: 1px solid #ddd;
-}
-
-/* Navbar */
-.container-fluid {
-  background: linear-gradient(90deg, #ffffff, #eaf7ff);
-  padding: 1.5em;
-  border: 2px solid #03fbff;
-  border-radius: 20px;
-  box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.1);
-}
-
-.nav-item a {
-  color: #000;
-  padding: 10px 20px;
-  margin: 5px;
-  border: 2px solid #03fbff;
-  border-radius: 15px;
-  font-weight: 600;
-  text-transform: uppercase;
-  transition: all 0.3s ease;
-}
-
-.nav-item a:hover {
-  background: #03fbff;
-  color: white;
-  transform: translateY(-2px);
-}
-
-/* Dropdown menu */
-.dropdown-menu {
-  background: #ffffff;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.dropdown-menu a {
-  color: #000;
-  font-size: 14px;
-  padding: 10px 15px;
-  transition: background-color 0.3s ease;
-}
-
-.dropdown-menu a:hover {
-  background-color: #03fbff;
-  color: white;
-}
-
-/* Body styling */
-body {
-  width: 90%;
-  margin: auto;
-  background-color: #f5f5f5;
-  font-family: 'Arial', sans-serif;
-  font-size: 16px;
-  line-height: 1.6;
-}
-
-/* Responsive styles */
-@media (max-width: 768px) {
-  canvas {
-    width: 90% !important;
-    margin-bottom: 15px;
-  }
-
-  #chartsContainer {
-    flex-direction: column;
-    gap: 15px;
-  }
-
-  .container-fluid {
-    padding: 1em;
-    font-size: 1.2em;
-  }
-
-  .btn, .nav-item a {
-    font-size: 14px;
-  }
-}
-
-/*---------------------------------------------------------------------------------------------------------------*/
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="/navbar.css">
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  </style>
 </head>
 
 <body>
@@ -241,7 +52,7 @@ body {
                     </li>
                   </ul>
                 <li class="nav-item">
-                  <a class="nav-link" href="/dashboard/product_db/s_product.php">Product</a>
+                  <a class="nav-link" href="/dashboard/product_db/s_product.php">PRODUCT</a>
                 </li>
                 </li>
               </ul>
@@ -250,7 +61,7 @@ body {
 
           </div>
 
-          <button class="btn-item"><a class="nav-link" href="./logout.php">LOG OUT</a></button>
+          <button class="btn btn-info"><a class="nav-link" href="./logout.php">LOG OUT</a></button>
 
         </div>
 
@@ -288,7 +99,7 @@ body {
   <input type="text" id="region" placeholder="Enter region name">
   <button onclick="fetchData()">Search</button> -->
   </div>
-
+  <!-- <a href="/dashboard/product_db/s_product.php"><button style="margin-top: 10px;" class="btn">ADD PRODUCT</button></a> -->
   <table border="1" id="productTable">
     <thead>
       <tr>
@@ -399,7 +210,96 @@ body {
     fetchData();
   </script>
 
+  <!-- Footer section -->
+  <div>
+    <section class="footer">
+      <div class="footer-row">
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul class="links">
+            <div style="color:white">
+              <h3 style="color: white;">Email</h3>
+              <li><a href="#">info@agrivii.asia</a></li>
+            </div>
+            <div style=" color:white">
+              <h3>AgriVII Helpline (free call)</h3>
+              <li><i class="fa-solid fa-phone"></i> 8808008500800</li>
+            </div>
+            <div style=" color:white">
+              <h3>Calling Hours</h3>
+              <li>Sat-Thu, 10AM-06PM</li>
+            </div>
+            <div style=" color:white">
+              <h3>Business Team</h3>
+              <li><i class="fa-solid fa-phone"></i> 01302536026</li>
+              <li><i class="fa-brands fa-square-whatsapp"></i> 01784167973</li>
+            </div>
 
+
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Location</h4>
+          <ul class="links">
+            <div style="color: white;">
+              <h3>Singapore</h3>
+              <li>3 Fraser Street #05-24, <br> Duo Tower,<br> 3 Temasek Avenue,<br> Centennial Tower,<br> #17-01,<br>
+                Singapore
+                039190</li>
+            </div>
+            <div style="color: white;">
+              <h3>Bangladesh</h3>
+              <li>8E, Road - 81, Gulshan-2,<br>
+                Dhaka-1212</li>
+            </div>
+            <div style="color: white;">
+              <h3>Visiting Hours</h3>
+              <li>Sun-Thu, (Appointment Basis)</li>
+            </div>
+
+
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul class="links">
+            <div style="color: white;">
+              <h3>Business Information</h3>
+              <li>Trade License Number -273687 </li>
+            </div>
+            <div style="color: white;">
+              <h3>BIN Number</h3>
+              <li>0017302330402</li>
+            </div>
+            <div style="color: white;">
+              <h3>DCCI Serial Number</h3>
+              <li>09284</li>
+            </div>
+
+
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Newsletter</h4>
+          <p>
+            Subscribe to our newsletter for a weekly dose
+            of news, updates, helpful tips, and
+            exclusive offers.
+          </p>
+          <form action="#">
+            <input type="text" placeholder="Your email" required>
+            <button type="submit">SUBSCRIBE</button>
+          </form>
+          <!-- <div class="icons">
+           <i class="fa-brands fa-facebook-f"></i>
+           <i class="fa-brands fa-twitter"></i>
+           <i class="fa-brands fa-linkedin"></i>
+           <i class="fa-brands fa-github"></i>
+         </div> -->
+        </div>
+      </div>
+    </section>
+  </div>
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

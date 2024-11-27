@@ -10,7 +10,7 @@ body {
 body {
  width: 90%;
  margin: auto;
- margin-top: 5%;
+ /* margin-top:1%; */
  text-align: center;
  /* background: linear-gradient(270deg, #5ed1d7, #02f2ff, #00ffe5, #0dffeb, #00f8db); */
 }
@@ -72,7 +72,7 @@ form {
  background-color: #ffffff;
  border-radius: 10px;
  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
- 
+
 }
 
 label {
