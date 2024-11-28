@@ -101,7 +101,7 @@ $result = $conn->query($sql);
         }
 
 
-        // Update the product quantity in the database via AJAX
+        // Update the product quantity in the database viaa AJAX
         function updateProductQuantityInDatabase(product_id, quantity) {
             // Send AJAX request to update product quantity in the database
             const xhr = new XMLHttpRequest();
